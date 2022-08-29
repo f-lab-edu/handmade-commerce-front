@@ -6,8 +6,20 @@ import Category from '../src/product_list/components/Category'
 import List from '../src/product_list/components/List'
 import styles from '../styles/Home.module.css'
 import { usePrefetchList } from '../src/product_list/remotes'
-import { prefetch } from '../src/hook/reactQuery'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getProductList } from '../src/hook/product'
+
+// export async function getStaticProps() {
+//   const queryClient = new QueryClient()
+
+//   // await queryClient.prefetchQuery(['product_list'], getProductList)
+
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   }
+// }
 
 const Home: NextPage = () => {
   usePrefetchList()
@@ -26,5 +38,6 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
 
 export default Home

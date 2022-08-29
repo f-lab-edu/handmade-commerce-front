@@ -1,31 +1,24 @@
-import { UseQueryResult } from '@tanstack/react-query'
-import { AxiosError, AxiosResponse } from 'axios'
-import React from 'react'
+import { QueryErrorResetBoundary, useQueryErrorResetBoundary } from '@tanstack/react-query'
+import { ErrorBoundary } from 'react-error-boundary'
+import React, { Suspense } from 'react'
 import { flex_css } from '../../../shared/styles/shared'
+import { ProductListType } from '../interface'
 import { useProductList } from '../remotes'
 import { list_css } from '../styles/list_css'
 import ListItem from './ListItem'
-
-interface ProductItem {
-  name: string
-}
-
-interface QueryData {
-  data: ProductItem[]
-}
-
-
+import Loading from '../../shared/component/Loading'
 
 const ListContent = () => {
-  const {data} = useProductList()
+  const {data, isLoading} = useProductList()
   console.log('>>>>>>>')
-  console.log(data)
+  console.log(isLoading)
+  // if (isLoading) return <Loading />
   return (
-    <section css={[list_css.container, flex_css.flex_row, flex_css.flex_wrap]}>
-      {/* {data.map((x: ProductItem)=><ListItem key={1} />)} */}
-      {data?.map((x: ProductItem, i:number)=>{return (<p key={i}>{x.name}</p>)})}
-        
-    </section>
+    <Suspense fallback={<Loading />}>
+      <section css={[list_css.container, flex_css.flex_row, flex_css.flex_wrap]}>
+        {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)}
+      </section>
+    </Suspense>
   )
 }
 

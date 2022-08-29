@@ -1,11 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import { ProductListType } from "../product_list/interface";
 import { axiosGet } from "../remotes/axios";
 
-interface ttype {
-    name: string
-}
-
-export const getProductList = async(): Promise<ttype[]> => {
-    const { data } = await axiosGet('http://localhost:3001/product')
+export const getProductList = async(): Promise<ProductListType[]> => {
+    const { data } = await axiosGet('/product')
     return data
 }

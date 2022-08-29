@@ -7,6 +7,8 @@ export const usePrefetchList = () => {
 }
 
 export const useProductList = () => {
-   return useQuery(['product_list'], getProductList)
+   const aa = useQuery(['product_list'], getProductList)
+   console.log(aa.isLoading)
+   return aa
 }
 

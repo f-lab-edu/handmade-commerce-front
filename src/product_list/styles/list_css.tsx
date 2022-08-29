@@ -3,7 +3,6 @@ import { css } from '@emotion/react'
 export const category_css = {
     container: css({
         width: 260,
-        background: 'yellow'
     }),
 }
 
