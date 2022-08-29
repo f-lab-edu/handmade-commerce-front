@@ -9,17 +9,17 @@ import { usePrefetchList } from '../src/product_list/remotes'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getProductList } from '../src/hook/product'
 
-// export async function getStaticProps() {
-//   const queryClient = new QueryClient()
+export async function getStaticProps() {
+  const queryClient = new QueryClient()
 
-//   // await queryClient.prefetchQuery(['product_list'], getProductList)
+  await queryClient.prefetchQuery(['product_list'], getProductList)
 
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   }
-// }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
+}
 
 const Home: NextPage = () => {
   usePrefetchList()
