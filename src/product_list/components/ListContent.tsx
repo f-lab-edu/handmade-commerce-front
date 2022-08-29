@@ -2,7 +2,7 @@ import { UseQueryResult } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import React from 'react'
 import { flex_css } from '../../../shared/styles/shared'
-import { fetchProductList } from '../remotes'
+import { useProductList } from '../remotes'
 import { list_css } from '../styles/list_css'
 import ListItem from './ListItem'
 
@@ -11,19 +11,19 @@ interface ProductItem {
 }
 
 interface QueryData {
-  data: Array<ProductItem>
+  data: ProductItem[]
 }
 
 
 
 const ListContent = () => {
-  const data:any= fetchProductList()
+  const {data} = useProductList()
   console.log('>>>>>>>')
-  console.log(data.data)
+  console.log(data)
   return (
     <section css={[list_css.container, flex_css.flex_row, flex_css.flex_wrap]}>
       {/* {data.map((x: ProductItem)=><ListItem key={1} />)} */}
-      {data?.data?.map((x: ProductItem, i:number)=>{return (<p key={i}>{x.name}</p>)})}
+      {data?.map((x: ProductItem, i:number)=>{return (<p key={i}>{x.name}</p>)})}
         
     </section>
   )

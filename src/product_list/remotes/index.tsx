@@ -1,21 +1,12 @@
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { getProductList } from "../../hook/product"
-import { Query } from "../../hook/reactQuery"
 
-// export const fetchProductList = async() => {
-//   return await getProductList()
-// }
+const queryClient = new QueryClient()
+export const usePrefetchList = () => {
+  queryClient.prefetchQuery(['product_list'], getProductList)
+}
 
-// export const prefetchProductList = () => {
-//     return Prefetch('product_list', getProductList)
-// }
-interface ProductItem {
-  name: string
+export const useProductList = () => {
+   return useQuery(['product_list'], getProductList)
 }
-let mBook : ProductItem;
-export const fetchProductList = () => {
-   const res = Query('product_list', getProductList)
-   console.log('===')
-   console.log(res)
-   console.log(res)
-   return res
-}
+
