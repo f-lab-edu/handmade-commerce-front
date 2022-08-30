@@ -10,15 +10,11 @@ import Loading from '../../shared/component/Loading'
 
 const ListContent = () => {
   const {data, isLoading} = useProductList()
-  console.log('>>>>>>>')
-  console.log(isLoading)
-  // if (isLoading) return <Loading />
+  if (isLoading) return <Loading />
   return (
-    <Suspense fallback={<Loading />}>
-      <section css={[list_css.container, flex_css.flex_row, flex_css.flex_wrap]}>
-        {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)}
-      </section>
-    </Suspense>
+    <section css={[list_css.container, flex_css.flex_row, flex_css.flex_wrap]}>
+      {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)}
+    </section>
   )
 }
 

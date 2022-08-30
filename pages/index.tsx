@@ -22,7 +22,6 @@ export async function getStaticProps() {
 }
 
 const Home: NextPage = () => {
-  usePrefetchList()
   return (
     <div className={styles.container}>
       <Head>

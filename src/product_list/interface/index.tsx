@@ -5,7 +5,6 @@ export interface ProductListType {
     category: number,
     detailImg: string,
     mainImg: string,
-    optPrice: null,
-    price: number,
+    base_price: string,
     subCategory: number
 }

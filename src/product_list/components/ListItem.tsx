@@ -15,7 +15,7 @@ const ListItem = ({value}: Props) => {
       <div css={flex_css.flex_column}>
         <span>{value.brand}</span>
         <span>{value.name}</span>
-        <span>{value.price}</span>
+        <span>{value.base_price}</span>
       </div>
     </div>
   )

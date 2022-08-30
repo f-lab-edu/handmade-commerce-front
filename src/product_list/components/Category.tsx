@@ -3,9 +3,7 @@ import { category_list } from '../utils/category_list'
 import CategoryItem from './CategoryItem'
 import { category_css } from '../styles/list_css'
 
-type Props = {}
-
-const Category = (props: Props) => {
+const Category = () => {
   return (
     <nav css={category_css.container}>
         <ul>
