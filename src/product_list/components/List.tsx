@@ -1,6 +1,5 @@
 import React from 'react'
 import { flex_css, width100 } from '../../../shared/styles/shared'
-import { list_css } from '../styles/list_css'
 import ListContent from './ListContent'
 
 const List = () => {

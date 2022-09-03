@@ -1,12 +1,17 @@
 import { css } from '@emotion/react'
 
-export const category_css = {
+export const category_css: {
+    container: ReturnType<typeof css>,
+} = {
     container: css({
         width: 260,
     }),
 }
 
-export const list_css = {
+export const list_css: {
+    container: ReturnType<typeof css>,
+    item: ReturnType<typeof css>,
+} = {
     container: css({
         maxWidth: 1600,
         width: '100%',

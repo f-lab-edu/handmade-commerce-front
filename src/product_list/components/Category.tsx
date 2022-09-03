@@ -1,11 +1,15 @@
 import React from 'react'
+import { css } from '@emotion/react'
 import { category_list } from '../utils/category_list'
 import CategoryItem from './CategoryItem'
-import { category_css } from '../styles/list_css'
+
+const categoryStyle = css({
+  width: 260,
+})
 
 const Category = () => {
   return (
-    <nav css={category_css.container}>
+    <nav css={categoryStyle}>
         <ul>
             {category_list.map(x => <CategoryItem key={x.id} name={x.name} link={x.link} />)}
         </ul>
