@@ -7,6 +7,7 @@ import { useProductList } from '../remotes'
 import ListItem from './ListItem'
 import Loading from '../../shared/component/Loading'
 import { css } from '@emotion/react'
+import List from './List'
 
 const listStyle = css({
   maxWidth: 1600,
@@ -19,9 +20,11 @@ const ListContent = () => {
   const {data, isLoading} = useProductList()
   if (isLoading) return <Loading />
   return (
-    <section css={[listStyle, flex_css.flex_row, flex_css.flex_wrap]}>
-      {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)}
-    </section>
+    <List>
+      <List.Content>
+        {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)}
+      </List.Content>
+    </List>
   )
 }
 

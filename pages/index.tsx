@@ -8,6 +8,8 @@ import styles from '../styles/Home.module.css'
 import { usePrefetchList } from '../src/product_list/remotes'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getProductList } from '../src/hook/product'
+import ListContent from '../src/product_list/components/ListContent'
+import CategoryContent from '../src/product_list/components/CategoryContent'
 
 export async function getStaticProps() {
   const queryClient = new QueryClient()
@@ -31,8 +33,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main css={flex_css.flex_row}>
-        <Category />
-        <List />
+        <CategoryContent />
+        <ListContent />
       </main>
     </div>
   )
