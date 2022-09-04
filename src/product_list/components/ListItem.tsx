@@ -15,14 +15,14 @@ const listItemStyle = css({
 
 const ListItem = ({value}: Props) => {
   return (
-    <div css={listItemStyle}>
+    <li css={listItemStyle}>
       <Image src={value?.mainImg || ''} width={300} height={300} alt='thumbnail' layout='responsive' priority/>
       <div css={flex_css.flex_column}>
         <span>{value.brand}</span>
         <span>{value.name}</span>
         <span>{value.base_price}</span>
       </div>
-    </div>
+    </li>
   )
 }
 
