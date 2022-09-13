@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { Suspense } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { flex_css } from '../shared/styles/shared'
-import Category from '../src/product_list/components/Category'
-import List from '../src/product_list/components/List'
 import styles from '../styles/Home.module.css'
-import { usePrefetchList } from '../src/product_list/remotes'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getProductList } from '../src/hook/product'
-import ListContent from '../src/product_list/components/ListContent'
 import CategoryContent from '../src/product_list/components/CategoryContent'
+import Loading from '../src/shared/component/Loading'
+import dynamic from 'next/dynamic'
 
 export async function getStaticProps() {
   const queryClient = new QueryClient()
@@ -23,6 +21,10 @@ export async function getStaticProps() {
   }
 }
 
+const ListContent = dynamic(() => import('../src/product_list/components/ListContent'), {
+  suspense: true
+})
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -34,7 +36,9 @@ const Home: NextPage = () => {
 
       <main css={flex_css.flex_row}>
         <CategoryContent />
-        <ListContent />
+        <Suspense fallback={<Loading />}>
+          <ListContent />
+        </Suspense>
       </main>
     </div>
   )
