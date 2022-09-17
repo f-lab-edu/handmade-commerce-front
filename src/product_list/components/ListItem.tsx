@@ -1,8 +1,9 @@
+import { css } from '@emotion/react'
 import Image from 'next/image'
 import React from 'react'
 import { flex_css } from '../../../shared/styles/shared'
 import { ProductListType } from '../interface'
-import { list_css } from '../styles/list_css'
+import List from './List'
 
 interface Props {
     value: ProductListType
@@ -10,14 +11,14 @@ interface Props {
 
 const ListItem = ({value}: Props) => {
   return (
-    <div css={list_css.item}>
+    <List.Item>
       <Image src={value?.mainImg || ''} width={300} height={300} alt='thumbnail' layout='responsive' priority/>
-      <div css={flex_css.flex_column}>
-        <span>{value.brand}</span>
-        <span>{value.name}</span>
-        <span>{value.base_price}</span>
-      </div>
-    </div>
+      <List.Info>
+        <List.InfoText>{value.brand}</List.InfoText>
+        <List.InfoText>{value.name}</List.InfoText>
+        <List.InfoText>{value.base_price}</List.InfoText>
+      </List.Info>
+    </List.Item>
   )
 }
 

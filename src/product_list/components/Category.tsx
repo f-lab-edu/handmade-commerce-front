@@ -1,16 +1,27 @@
 import React from 'react'
-import { category_list } from '../utils/category_list'
-import CategoryItem from './CategoryItem'
-import { category_css } from '../styles/list_css'
+import { css } from '@emotion/react'
+import { ChildrenProps } from '../../shared/interface/props'
 
-const Category = () => {
+const categoryStyle = css({
+  width: 260,
+})
+
+const Category = ({children}: ChildrenProps) => {
   return (
-    <nav css={category_css.container}>
+    <nav css={categoryStyle}>
         <ul>
-            {category_list.map(x => <CategoryItem key={x.id} name={x.name} link={x.link} />)}
+            {children}
         </ul>
     </nav>
   )
 }
+
+const Item = ({children}: ChildrenProps) => {
+  return (
+    <li>{children}</li>
+  )
+}
+
+Category.Item = Item
 
 export default Category
