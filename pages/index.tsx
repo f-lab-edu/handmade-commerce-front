@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { flex_css } from '../shared/styles/shared'
@@ -20,7 +20,7 @@ export async function getStaticProps() {
     },
   }
 }
-
+ 
 const ListContent = dynamic(() => import('../src/product_list/components/ListContent'), {
   suspense: true
 })
