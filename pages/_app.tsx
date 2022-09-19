@@ -9,8 +9,22 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ErrorBoundary from "../src/shared/error/ErrorBoundary";
 import CssBaseline from "@mui/material/CssBaseline";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import theme from "../src/theme";
+import createEmotionCache from "../src/createEmotionCache";
+import { ThemeProvider } from "@mui/material/styles";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const clientSideEmotionCache = createEmotionCache();
+
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+function MyApp({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}: MyAppProps) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -25,15 +39,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        {/* <CssBaseline /> */}
-        <ErrorBoundary>
-          <Component {...pageProps} />
-        </ErrorBoundary>
-      </Hydrate>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <CacheProvider value={emotionCache}>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ErrorBoundary>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </ErrorBoundary>
+        </Hydrate>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </CacheProvider>
   );
 }
 

@@ -1,25 +1,36 @@
-import { ProductListType } from '../interface'
-import { useProductList } from '../remotes'
-import ListItem from './ListItem'
-import List from './List'
-import { useState } from 'react'
-
-// const ErrorComponent = () => {
-//   const [error, setError] = useState(false)
-//   if (error) throw new Error('에러발생')
-//   return <button onClick={() => setError(true)}>Error</button>
-// }
+import { ProductType } from "../interface";
+import { useProductList } from "../remotes";
+import ListItem from "./ListItem";
+import List from "./List";
+import Search from "../../search/component/Search";
+import { Pagination } from "@mui/material";
+import React, { useState } from "react";
 
 const ListContent = () => {
-  const {data: list} = useProductList()
+  const [page, setPage] = useState(0);
+  const { data } = useProductList(page);
+
+  const onHandlePage = (eventPage: number) => {
+    console.log(eventPage);
+    setPage(eventPage);
+  };
+
   return (
     <List>
-        <List.Content>
-        {/* <ErrorComponent/> */}
-          {list?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)}        
-        </List.Content>
+      <Search />
+      <List.Content>
+        {data?.list?.map((x: ProductType) => (
+          <ListItem key={x.id} value={x} />
+        ))}
+      </List.Content>
+      <Pagination
+        onChange={(e, page) => onHandlePage(page)}
+        count={data?.count}
+        showFirstButton
+        showLastButton
+      />
     </List>
-  )
-}
+  );
+};
 
-export default ListContent
+export default ListContent;
