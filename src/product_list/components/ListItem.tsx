@@ -11,7 +11,7 @@ interface Props {
 
 const ListItem = ({ value }: Props) => {
   return (
-    <List.Item>
+    <List.Item id={value.id}>
       <Image
         src={value?.mainImg || ""}
         width={300}

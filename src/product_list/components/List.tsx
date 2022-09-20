@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import Link from "next/link";
 import React from "react";
 import { flex_css, width100 } from "../../../shared/styles/shared";
 import { ChildrenProps } from "../../shared/interface/props";
@@ -35,8 +36,18 @@ const Content = ({ children }: ChildrenProps) => {
   );
 };
 
-const Item = ({ children }: ChildrenProps) => {
-  return <li css={listItemStyle}>{children}</li>;
+interface ItemProps extends ChildrenProps {
+  id: number;
+}
+
+const Item = ({ children, id }: ItemProps) => {
+  return (
+    <li css={listItemStyle}>
+      <Link href={`/product/${id}`}>
+        <a>{children}</a>
+      </Link>
+    </li>
+  );
 };
 
 const Info = ({ children }: ChildrenProps) => {
