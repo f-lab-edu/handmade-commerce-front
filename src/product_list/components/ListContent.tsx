@@ -8,7 +8,9 @@ import React, { useState } from "react";
 
 const ListContent = () => {
   const [page, setPage] = useState(0);
-  const { data } = useProductList(page);
+  const [keyword, setKeyword] = useState("");
+  const [enabledButton, setEnabledButton] = useState(true);
+  const { data } = useProductList(page, keyword, enabledButton);
 
   const onHandlePage = (eventPage: number) => {
     console.log(eventPage);
@@ -17,7 +19,7 @@ const ListContent = () => {
 
   return (
     <List>
-      <Search />
+      <Search setKeyword={setKeyword} setEnabledButton={setEnabledButton} />
       <List.Content>
         {data?.list?.map((x: ProductType) => (
           <ListItem key={x.id} value={x} />

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-type Props = {};
+interface Props {
+  setKeyword: Dispatch<SetStateAction<string>>;
+  setEnabledButton: Dispatch<SetStateAction<boolean>>;
+}
 
-const Search = (props: Props) => {
+const Search = ({ setKeyword, setEnabledButton }: Props) => {
+  const onHandleKeyword = (e: any) => {
+    console.log(e.target.value);
+    setKeyword(e.target.value);
+  };
+
+  const onClick = () => {
+    setEnabledButton(false);
+  };
+
   return (
     <div>
       <TextField
@@ -12,8 +24,9 @@ const Search = (props: Props) => {
         label="Search field"
         type="search"
         variant="standard"
+        onChange={onHandleKeyword}
       />
-      <button>
+      <button onClick={onClick}>
         <SearchIcon />
       </button>
     </div>
