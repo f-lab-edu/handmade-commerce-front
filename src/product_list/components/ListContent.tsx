@@ -4,18 +4,22 @@ import ListItem from "./ListItem";
 import List from "./List";
 import Search from "../../search/component/Search";
 import { Pagination } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ListContent = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
-  const [enabledButton, setEnabledButton] = useState(true);
+  const [enabledButton, setEnabledButton] = useState(false);
   const { data } = useProductList(page, keyword, enabledButton);
 
   const onHandlePage = (eventPage: number) => {
     console.log(eventPage);
     setPage(eventPage);
   };
+
+  useEffect(() => {
+    console.log(enabledButton);
+  }, [enabledButton]);
 
   return (
     <List>

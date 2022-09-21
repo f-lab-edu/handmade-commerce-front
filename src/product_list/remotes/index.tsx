@@ -9,16 +9,13 @@ export const getPrefetchList = () => {
 };
 
 export const useProductList = (
-  page: number = 0,
+  page: number = 1,
   keyword: string = "",
   enabledButton: boolean
 ) => {
   console.log(page, keyword);
   return useQuery<ProductListType, AxiosError>(
-    ["product_list", page],
-    () => getProductList(page, keyword),
-    {
-      enabled: enabledButton,
-    }
+    ["product_list", { page, enabledButton }],
+    () => getProductList(page, keyword)
   );
 };
