@@ -37,7 +37,7 @@ const Content = ({ children }: ChildrenProps) => {
 };
 
 interface ItemProps extends ChildrenProps {
-  id: number;
+  id?: number;
 }
 
 const Item = ({ children, id }: ItemProps) => {
