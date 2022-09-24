@@ -5,7 +5,7 @@ import { ProductType } from "../../product_list/interface";
 
 export const useProductItem = (productId: string) => {
   console.log(productId);
-  return useQuery<ProductType, AxiosError>(["product", productId], () =>
+  return useQuery<ProductType, AxiosError>(["product"], () =>
     getProductItem(productId)
   );
 };
