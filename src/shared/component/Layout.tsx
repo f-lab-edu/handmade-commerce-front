@@ -11,6 +11,7 @@ const layout_css = {
     alignItems: "center",
     paddingRight: "10%",
     paddingLeft: "10%",
+    marginTop: 30,
   }),
   item: css({
     width: "100%",

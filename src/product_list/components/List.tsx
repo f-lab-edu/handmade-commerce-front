@@ -3,9 +3,6 @@ import Link from "next/link";
 import React from "react";
 import { flex_css, width100 } from "../../../shared/styles/shared";
 import { ChildrenProps } from "../../shared/interface/props";
-import { ProductListType } from "../interface";
-// import ListContent from './ListContent'
-import ListItem from "./ListItem";
 
 const listStyle = css({
   maxWidth: 1600,

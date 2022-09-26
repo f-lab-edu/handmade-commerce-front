@@ -9,6 +9,7 @@ import CategoryContent from "../src/product_list/components/CategoryContent";
 import Loading from "../src/shared/component/Loading";
 import dynamic from "next/dynamic";
 import { getPrefetchList } from "../src/product_list/remotes";
+import Container from "../src/shared/component/Container";
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -38,12 +39,14 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main css={flex_css.flex_row}>
-        <CategoryContent />
-        <Suspense fallback={<Loading />}>
-          <ListContent />
-        </Suspense>
-      </main>
+      <Container>
+        <main css={flex_css.flex_row}>
+          <CategoryContent />
+          <Suspense fallback={<Loading />}>
+            <ListContent />
+          </Suspense>
+        </main>
+      </Container>
     </div>
   );
 };

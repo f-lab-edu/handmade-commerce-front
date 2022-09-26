@@ -23,7 +23,7 @@ const ListContent = () => {
 
   return (
     <List>
-      <Search setKeyword={setKeyword} setEnabledButton={setEnabledButton} />
+      {/* <Search setKeyword={setKeyword} setEnabledButton={setEnabledButton} /> */}
       <List.Content>
         {data?.list?.map((x: ProductType) => (
           <ListItem key={x.id} value={x} />
