@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import {
@@ -13,6 +18,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import { ThemeProvider } from "@mui/material/styles";
+import { ContextProvider } from "../src/hook/GlobalContext";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -20,11 +26,18 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
+interface IGlobalContext {
+  category?: string;
+  setCategory?: Dispatch<SetStateAction<string>>;
+}
+
 function MyApp({
   Component,
   pageProps,
   emotionCache = clientSideEmotionCache,
 }: MyAppProps) {
+  const GlobalContext = createContext<IGlobalContext>({});
+  const [category, setCategory] = useState("1");
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -38,20 +51,27 @@ function MyApp({
       })
   );
 
+  const value = {
+    category,
+    setCategory,
+  };
+
   return (
-    <CacheProvider value={emotionCache}>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ErrorBoundary>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </ErrorBoundary>
-        </Hydrate>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </CacheProvider>
+    <ContextProvider>
+      <CacheProvider value={emotionCache}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ErrorBoundary>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Component {...pageProps} />
+              </ThemeProvider>
+            </ErrorBoundary>
+          </Hydrate>
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+      </CacheProvider>
+    </ContextProvider>
   );
 }
 

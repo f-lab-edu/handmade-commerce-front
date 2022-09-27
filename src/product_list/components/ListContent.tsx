@@ -4,22 +4,33 @@ import ListItem from "./ListItem";
 import List from "./List";
 import Search from "../../search/component/Search";
 import { Pagination } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useCategory } from "../../hook/GlobalContext";
 
 const ListContent = () => {
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
-  const [enabledButton, setEnabledButton] = useState(false);
-  const { data } = useProductList(page, keyword, enabledButton);
+  const { category, setCategory, setSubCategory } = useCategory();
+  const { data } = useProductList({
+    page,
+    keyword,
+  });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    const categoryQ: string = router.query.category as string;
+    const subCategoryQ: string = router.query.subCategory as string;
+    setCategory(categoryQ ? categoryQ : "1");
+    setSubCategory(subCategoryQ ? subCategoryQ : "1");
+    setPage(1);
+  }, [router.isReady, router.query, setCategory, setSubCategory]);
 
   const onHandlePage = (eventPage: number) => {
     console.log(eventPage);
     setPage(eventPage);
   };
-
-  useEffect(() => {
-    console.log(enabledButton);
-  }, [enabledButton]);
 
   return (
     <List>
@@ -31,6 +42,7 @@ const ListContent = () => {
       </List.Content>
       <Pagination
         onChange={(e, page) => onHandlePage(page)}
+        page={page}
         count={data?.count}
         showFirstButton
         showLastButton

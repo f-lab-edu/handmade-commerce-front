@@ -1,27 +1,27 @@
 import React, { Suspense, useState } from "react";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { flex_css } from "../shared/styles/shared";
 import styles from "../styles/Home.module.css";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { getProductList } from "../src/hook/product";
 import CategoryContent from "../src/product_list/components/CategoryContent";
 import Loading from "../src/shared/component/Loading";
 import dynamic from "next/dynamic";
-import { getPrefetchList } from "../src/product_list/remotes";
+// import { getPrefetchList } from "../src/product_list/remotes";
 import Container from "../src/shared/component/Container";
-
-export async function getStaticProps() {
+export const getStaticProps = async (context: any) => {
   const queryClient = new QueryClient();
 
-  await getPrefetchList();
+  console.log("getstaticprops >>>>>.");
+  console.log(context);
+  // await getPrefetchList();
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
   };
-}
+};
 
 const ListContent = dynamic(
   () => import("../src/product_list/components/ListContent"),

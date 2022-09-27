@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import { css } from "@emotion/react";
 import { category_list } from "../../product_list/data/category_list";
 import { flex_css } from "../../../shared/styles/shared";
+import Link from "next/link";
+import { useCategory } from "../../hook/GlobalContext";
 
 type Props = {};
 
 const category_css = {
   container: css({
     backgroundColor: "black",
-    color: "white",
   }),
   item: css({
     fontWeight: "bold",
@@ -22,12 +23,26 @@ const category_css = {
 };
 
 const Category = (props: Props) => {
+  const { category } = useCategory();
   return (
     <ul css={[category_css.container, flex_css.flex_row, flex_css.flex_center]}>
       {category_list.map((x) => {
         return (
-          <li key={x.id} css={category_css.item}>
-            {x.name}
+          <li
+            key={x.id}
+            css={[
+              category_css.item,
+              css({ color: category === String(x.id) ? "orange" : "white" }),
+            ]}
+          >
+            <Link
+              href={{
+                pathname: "",
+                query: { category: x.id },
+              }}
+            >
+              <a>{x.name}</a>
+            </Link>
           </li>
         );
       })}

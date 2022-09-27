@@ -1,16 +1,26 @@
 import React, { useState } from "react";
+import { useCategory } from "../../hook/GlobalContext";
 import { category_list } from "../data/category_list";
-import Category from "./Category";
+import SubCategory from "./SubCategory";
 
 type Props = {};
 
 const CategoryContent = (props: Props) => {
+  const { category, subCategory } = useCategory();
+
   return (
-    <Category>
-      {category_list.map((x) => (
-        <Category.Item key={x.id}>{x.name}</Category.Item>
+    <SubCategory>
+      {category_list[Number(category) - 1]?.subCategory?.map((x) => (
+        <SubCategory.Item
+          key={x?.id}
+          category={category}
+          subCategory={subCategory}
+          id={x?.id}
+        >
+          {x?.name}
+        </SubCategory.Item>
       ))}
-    </Category>
+    </SubCategory>
   );
 };
 

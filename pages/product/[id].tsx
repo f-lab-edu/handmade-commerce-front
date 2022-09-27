@@ -9,7 +9,7 @@ import { ProductType } from "../../src/product_list/interface";
 import AutoHeightImage from "../../src/shared/component/AutoHeightImage";
 import ProductImage from "../../src/product_item/component/ProductImage";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { getProductItem, getProductList } from "../../src/hook/product";
+import { getProductItem, getAllList } from "../../src/hook/product";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 
@@ -24,7 +24,7 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const getStaticPaths = async () => {
-  const { list } = await getProductList(0, "", true); // page, keyword, all
+  const { list } = await getAllList(); // page, keyword, all
   console.log("====list====");
   console.log(typeof list[0].id);
   const paths = list?.map((x: ProductType) => {
