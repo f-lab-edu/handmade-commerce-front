@@ -33,7 +33,12 @@ const Search = () => {
         variant="standard"
         onChange={onHandleChange}
       />
-      <Link href={`?keyword=${inputValue}`}>
+      <Link
+        href={{
+          pathname: "/",
+          query: { keyword: inputValue },
+        }}
+      >
         <IconButton disabled={inputValue.length < 1} component="label">
           <SearchIcon />
         </IconButton>

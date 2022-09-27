@@ -23,6 +23,7 @@ const ListContent = () => {
     const keywordQ = router.query.keyword as string;
     if (keywordQ) {
       setKeyword(keywordQ);
+      setCategory("0");
     } else {
       setCategory(categoryQ ? categoryQ : "1");
       setSubCategory(subCategoryQ ? subCategoryQ : "1");

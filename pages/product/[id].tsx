@@ -1,5 +1,4 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useProductItem } from "../../src/product_item/remotes";
 import Product from "../../src/product_item/component/Product";
 import Image from "next/image";
@@ -12,12 +11,8 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { getProductItem, getAllList } from "../../src/hook/product";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
-
-// export async function getServerSideProps(context: { query: { id: string } }) {
-//   const { id } = context.query;
-//   console.log(`query id: ${id}`);
-//   return { props: { id } };
-// }
+import Container from "../../src/shared/component/Container";
+import { useCategory } from "../../src/hook/GlobalContext";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -42,9 +37,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   console.log("===id===");
   console.log(id);
   await queryClient.prefetchQuery(["product"], () => getProductItem(id));
-  // console.log(id);
 
-  // const props = fetch(`/api/${id}`);
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
@@ -62,8 +55,6 @@ const ProdouctItem = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [detailImgData, setDetailImgData] = useState<string[]>([""]);
   const { data, isLoading } = useProductItem(id);
-  console.log("---");
-  console.log(data);
   useEffect(() => {
     const imgArray: string[] = data?.detailImg?.split("||")!;
     console.log(imgArray);
@@ -71,7 +62,7 @@ const ProdouctItem = ({
   }, [data]);
 
   return (
-    <Layout>
+    <Container>
       <Product>
         <Product.Head>
           <Product.HeadLeft>
@@ -89,7 +80,7 @@ const ProdouctItem = ({
           <ProductDetailImage images={data?.detailImg} />
         </Product.Body> */}
       </Product>
-    </Layout>
+    </Container>
   );
 };
 

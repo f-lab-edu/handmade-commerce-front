@@ -37,7 +37,7 @@ const Category = (props: Props) => {
           >
             <Link
               href={{
-                pathname: "",
+                pathname: "/",
                 query: { category: x.id },
               }}
             >
