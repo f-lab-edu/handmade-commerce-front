@@ -22,7 +22,7 @@ export const GlobalContext = createContext<IGlobalContext>({
   keyword: "",
 });
 
-export const useCategory = () => useContext(GlobalContext);
+export const useHeader = () => useContext(GlobalContext);
 
 export const ContextProvider = ({ children }: ChildrenProps) => {
   const [category, setCategory] = useState("1");

@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { category_list } from "../../product_list/data/category_list";
 import { flex_css } from "../../../shared/styles/shared";
 import Link from "next/link";
-import { useCategory } from "../../hook/GlobalContext";
+import { useHeader } from "../../hook/GlobalContext";
 
 type Props = {};
 
@@ -23,7 +23,7 @@ const category_css = {
 };
 
 const Category = (props: Props) => {
-  const { category } = useCategory();
+  const { category } = useHeader();
   return (
     <ul css={[category_css.container, flex_css.flex_row, flex_css.flex_center]}>
       {category_list.map((x) => {

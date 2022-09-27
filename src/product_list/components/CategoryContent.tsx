@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useCategory } from "../../hook/GlobalContext";
+import { useHeader } from "../../hook/GlobalContext";
 import { category_list } from "../data/category_list";
 import SubCategory from "./SubCategory";
 
 type Props = {};
 
 const CategoryContent = (props: Props) => {
-  const { category, subCategory } = useCategory();
+  const { category, subCategory } = useHeader();
 
   return (
     <SubCategory>

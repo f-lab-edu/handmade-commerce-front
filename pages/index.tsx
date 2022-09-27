@@ -9,7 +9,7 @@ import Loading from "../src/shared/component/Loading";
 import dynamic from "next/dynamic";
 // import { getPrefetchList } from "../src/product_list/remotes";
 import Container from "../src/shared/component/Container";
-import { useCategory } from "../src/hook/GlobalContext";
+import { useHeader } from "../src/hook/GlobalContext";
 export const getStaticProps = async (context: any) => {
   const queryClient = new QueryClient();
 
@@ -32,7 +32,7 @@ const ListContent = dynamic(
 );
 
 const Home: NextPage = () => {
-  const { keyword } = useCategory();
+  const { keyword } = useHeader();
   return (
     <div className={styles.container}>
       <Head>

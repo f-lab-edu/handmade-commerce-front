@@ -12,7 +12,7 @@ import { getProductItem, getAllList } from "../../src/hook/product";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Container from "../../src/shared/component/Container";
-import { useCategory } from "../../src/hook/GlobalContext";
+import { useHeader } from "../../src/hook/GlobalContext";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
