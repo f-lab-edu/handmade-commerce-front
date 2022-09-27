@@ -15,7 +15,7 @@ const layout_css = {
   }),
   item: css({
     width: "100%",
-    minWidth: 1300,
+    minWidth: 1400,
     maxWidth: 1800,
   }),
 };

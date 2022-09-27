@@ -30,7 +30,7 @@ const ListContent = () => {
       setKeyword("");
     }
     setPage(1);
-  }, [router.isReady, router.query]);
+  }, [router.isReady, router.query, setCategory, setKeyword, setSubCategory]);
 
   const onHandlePage = (eventPage: number) => {
     console.log(eventPage);

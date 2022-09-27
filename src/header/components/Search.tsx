@@ -1,8 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { css, IconButton, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { flex_css } from "../../../shared/styles/shared";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface Props {}
 
@@ -17,6 +18,7 @@ const search_css = {
 };
 
 const Search = () => {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState("");
 
   const onHandleChange = (e: any) => {
@@ -31,6 +33,7 @@ const Search = () => {
         id="standard-search"
         type="search"
         variant="standard"
+        value={inputValue}
         onChange={onHandleChange}
       />
       <Link

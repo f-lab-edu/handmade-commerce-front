@@ -6,15 +6,15 @@ import { flex_css, width100 } from "../../../shared/styles/shared";
 import { ChildrenProps } from "../../shared/interface/props";
 
 const listStyle = css({
-  maxWidth: 1600,
+  // maxWidth: 1600,
   width: "100%",
-  marginRight: "3%",
+  marginRight: 30,
   marginLeft: 30,
 });
 
 const listItemStyle = css({
   width: 200,
-  marginRight: 30,
+  margin: 10,
   listStyle: "none",
 });
 
@@ -28,14 +28,7 @@ const List = ({ children }: ChildrenProps) => {
 
 const Content = ({ children }: ChildrenProps) => {
   return (
-    <section
-      css={[
-        listStyle,
-        flex_css.flex_row,
-        flex_css.flex_wrap,
-        flex_css.flex_center,
-      ]}
-    >
+    <section css={[listStyle, flex_css.flex_row, flex_css.flex_wrap]}>
       {children}
       {/* {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)} */}
     </section>
