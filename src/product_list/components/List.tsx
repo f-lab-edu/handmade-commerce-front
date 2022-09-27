@@ -14,6 +14,7 @@ const listStyle = css({
 const listItemStyle = css({
   width: 200,
   marginRight: 30,
+  listStyle: "none",
 });
 
 const List = ({ children }: ChildrenProps) => {
@@ -26,7 +27,14 @@ const List = ({ children }: ChildrenProps) => {
 
 const Content = ({ children }: ChildrenProps) => {
   return (
-    <section css={[listStyle, flex_css.flex_row, flex_css.flex_wrap]}>
+    <section
+      css={[
+        listStyle,
+        flex_css.flex_row,
+        flex_css.flex_wrap,
+        flex_css.flex_center,
+      ]}
+    >
       {children}
       {/* {data?.map((x: ProductListType)=><ListItem key={x.id} value={x} />)} */}
     </section>

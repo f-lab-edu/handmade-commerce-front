@@ -12,11 +12,14 @@ interface IGlobalContext {
   setCategory?: any;
   subCategory: string;
   setSubCategory?: any;
+  keyword: string;
+  setKeyword?: any;
 }
 
 export const GlobalContext = createContext<IGlobalContext>({
   category: "1",
   subCategory: "1",
+  keyword: "",
 });
 
 export const useCategory = () => useContext(GlobalContext);
@@ -24,10 +27,18 @@ export const useCategory = () => useContext(GlobalContext);
 export const ContextProvider = ({ children }: ChildrenProps) => {
   const [category, setCategory] = useState("1");
   const [subCategory, setSubCategory] = useState("1");
+  const [keyword, setKeyword] = useState("");
 
   return (
     <GlobalContext.Provider
-      value={{ category, setCategory, subCategory, setSubCategory }}
+      value={{
+        category,
+        setCategory,
+        subCategory,
+        setSubCategory,
+        keyword,
+        setKeyword,
+      }}
     >
       {children}
     </GlobalContext.Provider>

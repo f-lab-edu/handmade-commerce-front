@@ -10,22 +10,26 @@ import { useCategory } from "../../hook/GlobalContext";
 
 const ListContent = () => {
   const [page, setPage] = useState(1);
-  const [keyword, setKeyword] = useState("");
-  const { category, setCategory, setSubCategory } = useCategory();
+  const { category, setCategory, setSubCategory, setKeyword } = useCategory();
   const { data } = useProductList({
     page,
-    keyword,
   });
   const router = useRouter();
 
   useEffect(() => {
     if (!router.isReady) return;
-    const categoryQ: string = router.query.category as string;
-    const subCategoryQ: string = router.query.subCategory as string;
-    setCategory(categoryQ ? categoryQ : "1");
-    setSubCategory(subCategoryQ ? subCategoryQ : "1");
+    const categoryQ = router.query.category as string;
+    const subCategoryQ = router.query.subCategory as string;
+    const keywordQ = router.query.keyword as string;
+    if (keywordQ) {
+      setKeyword(keywordQ);
+    } else {
+      setCategory(categoryQ ? categoryQ : "1");
+      setSubCategory(subCategoryQ ? subCategoryQ : "1");
+      setKeyword("");
+    }
     setPage(1);
-  }, [router.isReady, router.query, setCategory, setSubCategory]);
+  }, [router.isReady, router.query]);
 
   const onHandlePage = (eventPage: number) => {
     console.log(eventPage);

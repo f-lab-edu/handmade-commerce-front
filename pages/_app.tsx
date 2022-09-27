@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { useState } from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import {
@@ -26,18 +21,11 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-interface IGlobalContext {
-  category?: string;
-  setCategory?: Dispatch<SetStateAction<string>>;
-}
-
 function MyApp({
   Component,
   pageProps,
   emotionCache = clientSideEmotionCache,
 }: MyAppProps) {
-  const GlobalContext = createContext<IGlobalContext>({});
-  const [category, setCategory] = useState("1");
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -50,12 +38,6 @@ function MyApp({
         },
       })
   );
-
-  const value = {
-    category,
-    setCategory,
-  };
-
   return (
     <ContextProvider>
       <CacheProvider value={emotionCache}>

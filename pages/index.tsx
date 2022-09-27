@@ -9,6 +9,7 @@ import Loading from "../src/shared/component/Loading";
 import dynamic from "next/dynamic";
 // import { getPrefetchList } from "../src/product_list/remotes";
 import Container from "../src/shared/component/Container";
+import { useCategory } from "../src/hook/GlobalContext";
 export const getStaticProps = async (context: any) => {
   const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const ListContent = dynamic(
 );
 
 const Home: NextPage = () => {
+  const { keyword } = useCategory();
   return (
     <div className={styles.container}>
       <Head>
@@ -40,8 +42,8 @@ const Home: NextPage = () => {
       </Head>
 
       <Container>
-        <main css={flex_css.flex_row}>
-          <CategoryContent />
+        <main css={[flex_css.flex_row]}>
+          {!keyword && <CategoryContent />}
           <Suspense fallback={<Loading />}>
             <ListContent />
           </Suspense>

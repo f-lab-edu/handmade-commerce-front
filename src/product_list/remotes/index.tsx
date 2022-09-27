@@ -11,13 +11,12 @@ import { ProductListType } from "../interface";
 
 interface Props {
   page: number;
-  keyword?: string;
 }
 
-export const useProductList = ({ page, keyword }: Props) => {
-  const { subCategory, category } = useCategory();
+export const useProductList = ({ page }: Props) => {
+  const { subCategory, category, keyword } = useCategory();
   return useQuery<ProductListType, AxiosError>(
-    ["product_list", { page, category, subCategory }],
+    ["product_list", { page, category, subCategory, keyword }],
     () => getProductList({ page, keyword, category, subCategory })
   );
 };
