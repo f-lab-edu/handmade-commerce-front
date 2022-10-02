@@ -49,7 +49,10 @@ const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   // const [detailImgData, setDetailImgData] = useState<string[]>([""]);
-  const { data, isLoading } = useProductItem(id);
+  const { data, isLoading, isSuccess } = useProductItem(id);
+
+  if (!isSuccess) return;
+
   // useEffect(() => {
   //   const imgArray: string[] = data?.detailImg?.split("||")!;
   //   console.log(imgArray);
@@ -61,13 +64,19 @@ const ProdouctItem = ({
       <Product>
         <Product.Head>
           <Product.HeadLeft>
-            <ProductImage images={data?.detailImg!} />
+            <ProductImage images={data.detailImg} />
           </Product.HeadLeft>
           <Product.HeadRight>
             <ProductInfo
-              name={data?.name}
-              brand={data?.brand}
-              base_price={data?.base_price}
+              name={data.name}
+              brand={data.brand}
+              base_price={data.base_price}
+              id={0}
+              category={0}
+              detailImg={[]}
+              mainImg={""}
+              subCategory={0}
+              discount_price={""}
             />
           </Product.HeadRight>
         </Product.Head>
