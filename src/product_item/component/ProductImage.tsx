@@ -16,7 +16,9 @@ const image_css = {
 };
 
 const ProductImage = ({ images }: Props) => {
-  const [selectedImg, setSelectedImg] = useState("");
+  const [selectedImg, setSelectedImg] = useState(
+    "../../images/default-image.png"
+  );
 
   const onClickImage = async (imageUrl: string) => {
     const replaceUrl = imageUrl.replace("?thumbnail=60x80", "");
