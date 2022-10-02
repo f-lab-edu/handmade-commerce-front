@@ -2,17 +2,17 @@ import { ProductListType, ProductType } from "../product_list/interface";
 import { axiosGet } from "../remotes/axios";
 
 interface Props {
-  page: number;
+  page?: number;
   keyword?: string;
-  category: string;
-  subCategory: string;
+  category?: string;
+  subCategory?: string;
 }
 
 export const getProductList = async ({
-  page,
+  page = 1,
   keyword,
-  category,
-  subCategory,
+  category = "1",
+  subCategory = "1",
 }: Props): Promise<ProductListType> => {
   const baseQuery = `/product?page=${page}`;
   let productUrl = `${baseQuery}&category=${category}&subCategory=${subCategory}`;

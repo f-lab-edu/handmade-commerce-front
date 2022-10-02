@@ -2,7 +2,6 @@ import { ProductType } from "../interface";
 import { useProductList } from "../remotes";
 import ListItem from "./ListItem";
 import List from "./List";
-import Search from "../../search/component/Search";
 import { Pagination } from "@mui/material";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { useRouter } from "next/router";

@@ -7,15 +7,13 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import CategoryContent from "../src/product_list/components/CategoryContent";
 import Loading from "../src/shared/component/Loading";
 import dynamic from "next/dynamic";
-// import { getPrefetchList } from "../src/product_list/remotes";
+import { getPrefetchList } from "../src/product_list/remotes";
 import Container from "../src/shared/component/Container";
 import { useHeader } from "../src/hook/GlobalContext";
 export const getStaticProps = async (context: any) => {
   const queryClient = new QueryClient();
 
-  console.log("getstaticprops >>>>>.");
-  console.log(context);
-  // await getPrefetchList();
+  await getPrefetchList();
 
   return {
     props: {

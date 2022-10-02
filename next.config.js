@@ -1,11 +1,12 @@
+const { withPlaiceholder } = require("@plaiceholder/next");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   concurrentFeatures: true,
   swcMinify: true,
   images: {
-    domains: ['image.wconcept.co.kr', "goldendew.com", "ai.esmplus.com"]
-  }
-}
+    domains: ["image.wconcept.co.kr", "goldendew.com", "ai.esmplus.com"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = withPlaiceholder(nextConfig);
