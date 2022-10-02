@@ -46,10 +46,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-interface RouterProps {
-  id: string;
-}
-
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {

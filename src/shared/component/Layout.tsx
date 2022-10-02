@@ -9,14 +9,14 @@ const layout_css = {
     flexDirection: "column",
     alignContent: "center",
     alignItems: "center",
-    paddingRight: "10%",
-    paddingLeft: "10%",
+    paddingRight: "15%",
+    paddingLeft: "15%",
     marginTop: 30,
   }),
   item: css({
     width: "100%",
-    minWidth: 1400,
-    maxWidth: 1800,
+    minWidth: 1300,
+    maxWidth: 1700,
   }),
 };
 

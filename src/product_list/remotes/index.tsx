@@ -4,10 +4,10 @@ import { useHeader } from "../../hook/GlobalContext";
 import { getProductList } from "../../hook/product";
 import { ProductListType } from "../interface";
 
-// const queryClient = new QueryClient();
-// export const getPrefetchList = () => {
-//   queryClient.prefetchQuery(["product_list"], () => getProductList(0));
-// };
+const queryClient = new QueryClient();
+export const getPrefetchList = () => {
+  queryClient.prefetchQuery(["product_list"], () => getProductList({}));
+};
 
 interface Props {
   page: number;
