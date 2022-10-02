@@ -12,7 +12,6 @@ import { getProductItem, getAllList } from "../../src/hook/product";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Container from "../../src/shared/component/Container";
-import { useHeader } from "../../src/hook/GlobalContext";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -49,20 +48,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [detailImgData, setDetailImgData] = useState<string[]>([""]);
+  // const [detailImgData, setDetailImgData] = useState<string[]>([""]);
   const { data, isLoading } = useProductItem(id);
-  useEffect(() => {
-    const imgArray: string[] = data?.detailImg?.split("||")!;
-    console.log(imgArray);
-    setDetailImgData(imgArray);
-  }, [data]);
+  // useEffect(() => {
+  //   const imgArray: string[] = data?.detailImg?.split("||")!;
+  //   console.log(imgArray);
+  //   setDetailImgData(imgArray);
+  // }, [data]);
 
   return (
     <Container>
       <Product>
         <Product.Head>
           <Product.HeadLeft>
-            <ProductImage images={detailImgData} />
+            <ProductImage images={data?.detailImg!} />
           </Product.HeadLeft>
           <Product.HeadRight>
             <ProductInfo

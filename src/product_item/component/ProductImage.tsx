@@ -16,11 +16,10 @@ const image_css = {
 };
 
 const ProductImage = ({ images }: Props) => {
-  const [selectedImg, setSelectedImg] = useState(images[0]);
+  const [selectedImg, setSelectedImg] = useState("");
 
   const onClickImage = async (imageUrl: string) => {
-    const replaceUrl = imageUrl.replace("?thumbnail=60x80", "");
-    setSelectedImg(replaceUrl);
+    setSelectedImg(imageUrl);
   };
 
   useEffect(() => {
