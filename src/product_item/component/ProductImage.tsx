@@ -35,6 +35,9 @@ const ProductImage = ({ images }: Props) => {
           height={800}
           width={600}
           alt="detail-image"
+          placeholder="blur"
+          blurDataURL="../../images/default-image.png"
+          priority
         />
       )}
       <div css={flex_css.flex_row}>
