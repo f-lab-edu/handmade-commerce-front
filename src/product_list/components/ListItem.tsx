@@ -15,10 +15,11 @@ const ListItem = ({ value }: Props) => {
       <Image
         src={value?.mainImg || ""}
         width={300}
-        height={300}
+        height={400}
         alt="thumbnail"
         layout="responsive"
-        priority
+        placeholder="blur"
+        blurDataURL="../../images/default-image.png"
       />
       <List.Info>
         <List.InfoText>{value.brand}</List.InfoText>
