@@ -31,7 +31,7 @@ const ProductImage = ({ images }: Props) => {
     <div css={flex_css.flex_column}>
       {images.length > 0 && (
         <Image
-          src={images[0] || selectedImg}
+          src={selectedImg || DefaultImage}
           height={800}
           width={600}
           alt="detail-image"
