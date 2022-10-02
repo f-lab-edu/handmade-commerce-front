@@ -27,16 +27,13 @@ const info_css = {
   }),
 };
 
-const ProductInfo = ({
-  name,
-  brand,
-  id,
-  category,
-  detailImg,
-  base_price,
-  subCategory,
-  discount_price,
-}: ProductType) => {
+interface Props {
+  name: string;
+  brand: string;
+  base_price: string;
+}
+
+const ProductInfo = ({ name, brand, base_price }: Props) => {
   const SaleInfo = () => {
     return (
       <>

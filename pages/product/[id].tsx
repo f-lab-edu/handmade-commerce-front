@@ -19,8 +19,6 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticPaths = async () => {
   const { list } = await getAllList(); // page, keyword, all
-  console.log("====list====");
-  console.log(typeof list[0].id);
   const paths = list?.map((x: ProductType) => {
     return {
       params: { id: x.id?.toString() },
@@ -33,8 +31,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
 
   const { id } = context.params as IParams;
-  console.log("===id===");
-  console.log(id);
   await queryClient.prefetchQuery(["product"], () => getProductItem(id));
 
   return {
@@ -48,16 +44,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  // const [detailImgData, setDetailImgData] = useState<string[]>([""]);
   const { data, isLoading, isSuccess } = useProductItem(id);
 
   if (!isSuccess) return;
-
-  // useEffect(() => {
-  //   const imgArray: string[] = data?.detailImg?.split("||")!;
-  //   console.log(imgArray);
-  //   setDetailImgData(imgArray);
-  // }, [data]);
 
   return (
     <Container>
@@ -71,12 +60,6 @@ const ProdouctItem = ({
               name={data.name}
               brand={data.brand}
               base_price={data.base_price}
-              id={0}
-              category={0}
-              detailImg={[]}
-              mainImg={""}
-              subCategory={0}
-              discount_price={""}
             />
           </Product.HeadRight>
         </Product.Head>

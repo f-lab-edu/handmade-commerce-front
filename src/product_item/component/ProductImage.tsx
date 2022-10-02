@@ -16,21 +16,22 @@ const image_css = {
 };
 
 const ProductImage = ({ images }: Props) => {
-  const [selectedImg, setSelectedImg] = useState("");
+  const [selectedImg, setSelectedImg] = useState(images[0]);
 
   const onClickImage = async (imageUrl: string) => {
     setSelectedImg(imageUrl);
   };
 
-  useEffect(() => {
-    setSelectedImg(images[0]);
-  }, [images]);
+  // useEffect(() => {
+  //   console.log("===click===");
+  //   setSelectedImg(images[0]);
+  // }, [images]);
 
   return (
     <div css={flex_css.flex_column}>
       {images.length > 0 && (
         <Image
-          src={selectedImg || DefaultImage}
+          src={images[0] || selectedImg}
           height={800}
           width={600}
           alt="detail-image"
