@@ -22,10 +22,10 @@ const ProductImage = ({ images }: Props) => {
     setSelectedImg(imageUrl);
   };
 
-  // useEffect(() => {
-  //   console.log("===click===");
-  //   setSelectedImg(images[0]);
-  // }, [images]);
+  useEffect(() => {
+    console.log("===click===");
+    setSelectedImg(images[0]);
+  }, [images]);
 
   return (
     <div css={flex_css.flex_column}>
@@ -49,12 +49,7 @@ const ProductImage = ({ images }: Props) => {
                 css={image_css.image}
                 onClick={() => onClickImage(x)}
               >
-                <Image
-                  src={x || DefaultImage}
-                  height={80}
-                  width={60}
-                  alt="detailImg"
-                />
+                <Image src={x} height={80} width={60} alt="detailImg" />
               </div>
             );
           })}

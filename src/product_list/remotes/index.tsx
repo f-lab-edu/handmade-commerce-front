@@ -1,6 +1,6 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useHeader } from "../../hook/GlobalContext";
+import { useSearchContext } from "../../context/SearchContext";
 import { getProductList } from "../../hook/product";
 import { ProductListType } from "../interface";
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const useProductList = ({ page }: Props) => {
-  const { subCategory, category, keyword } = useHeader();
+  const { subCategory, category, keyword } = useSearchContext();
   return useQuery<ProductListType, AxiosError>(
     ["product_list", { page, category, subCategory, keyword }],
     () => getProductList({ page, keyword, category, subCategory })

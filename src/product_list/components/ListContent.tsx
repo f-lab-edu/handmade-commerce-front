@@ -5,11 +5,12 @@ import List from "./List";
 import { Pagination } from "@mui/material";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useHeader } from "../../hook/GlobalContext";
+import { useSearchContext } from "../../context/SearchContext";
 
 const ListContent = () => {
   const [page, setPage] = useState(1);
-  const { category, setCategory, setSubCategory, setKeyword } = useHeader();
+  const { category, setCategory, setSubCategory, setKeyword } =
+    useSearchContext();
   const { data } = useProductList({
     page,
   });

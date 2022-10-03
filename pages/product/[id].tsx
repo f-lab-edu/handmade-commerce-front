@@ -1,15 +1,12 @@
 import React, { SetStateAction, useEffect, useState } from "react";
 import { useProductItem } from "../../src/product_item/remotes";
 import Product from "../../src/product_item/component/Product";
-import Image from "next/image";
-import Layout from "../../src/shared/component/Layout";
 import ProductInfo from "../../src/product_item/component/ProductInfo";
 import { ProductType } from "../../src/product_list/interface";
-import AutoHeightImage from "../../src/shared/component/AutoHeightImage";
 import ProductImage from "../../src/product_item/component/ProductImage";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { getProductItem, getAllList } from "../../src/hook/product";
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Container from "../../src/shared/component/Container";
 
@@ -44,22 +41,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data, isLoading, isSuccess } = useProductItem(id);
-
-  if (!isSuccess) return;
+  const { data } = useProductItem(id);
 
   return (
     <Container>
       <Product>
         <Product.Head>
           <Product.HeadLeft>
-            <ProductImage images={data.detailImg} />
+            <ProductImage images={data?.detailImg!} />
           </Product.HeadLeft>
           <Product.HeadRight>
             <ProductInfo
-              name={data.name}
-              brand={data.brand}
-              base_price={data.base_price}
+              name={data?.name}
+              brand={data?.brand}
+              base_price={data?.base_price}
+              id={data?.id}
+              mainImg={data?.mainImg}
             />
           </Product.HeadRight>
         </Product.Head>

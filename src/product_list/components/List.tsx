@@ -10,6 +10,7 @@ const listStyle = css({
   width: "100%",
   marginRight: 30,
   marginLeft: 30,
+  justifyContent: "center",
 });
 
 const listItemStyle = css({
