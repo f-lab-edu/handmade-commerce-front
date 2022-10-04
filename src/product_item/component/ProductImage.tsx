@@ -43,8 +43,8 @@ const ProductImage = ({ images }: Props) => {
         alt="detail-image"
         placeholder="blur"
         blurDataURL="../../images/default-image.png"
-        // priority
-        // css={image_css.zoom}
+        priority
+        css={image_css.zoom}
       />
       <div css={flex_css.flex_row}>
         {images.length > 0 &&
