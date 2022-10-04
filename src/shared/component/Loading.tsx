@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { flex_css } from "../../../shared/styles/shared";
 
-type Props = {}
-
-const Loading = (props: Props) => {
+const Loading = () => {
   return (
-    <div style={{background:'red', fontSize:50}}>Loading</div>
-  )
-}
+    <div css={flex_css.flex_center}>
+      <CircularProgress />
+    </div>
+  );
+};
 
-export default Loading
+export default Loading;

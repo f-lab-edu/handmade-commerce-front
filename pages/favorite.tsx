@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import {
   Checkbox,
   Table,
@@ -25,29 +25,67 @@ const favorite_css = {
   info: css({
     marginLeft: 30,
   }),
+  delete: css({
+    marginTop: 30,
+  }),
 };
+
+interface FavItem extends ProductType {
+  checked: boolean;
+}
 
 interface InfoProps {
   items: ProductType;
 }
 
 const Favorite = () => {
-  const [data, setData] = useState<ProductType[]>([
-    { id: 0, name: "", brand: "", base_price: "", mainImg: "" },
+  const [data, setData] = useState<FavItem[]>([
+    { id: 0, name: "", brand: "", base_price: "", mainImg: "", checked: false },
   ]);
   const { setCount, count } = useFavoriteContext();
 
   useEffect(() => {
     const fav_arr = JSON.parse(localStorage.getItem("favorite")!);
-    console.log(fav_arr);
-    setData(fav_arr || []);
+    const favData = fav_arr.map((x: FavItem) => ({
+      ...x,
+      checked: false,
+    }));
+    console.log(favData);
+    setData(favData || []);
   }, []);
 
-  const onRemove = (id: number) => {
-    const value = data.filter((item) => item.id !== id);
-    setData(value);
-    setCount(value.length);
-    localStorage.setItem("favorite", JSON.stringify(value));
+  const onRemoveItem = (id: number) => {
+    const filterItem = data.filter((item) => item.id !== id);
+    setData(filterItem);
+    setCount(filterItem.length);
+    localStorage.setItem("favorite", JSON.stringify(filterItem));
+  };
+
+  const onRemoveItems = () => {
+    const removedArr = data.filter((item) => item.checked === true);
+    const notRemovedArr = data.filter((item) => item.checked !== true);
+    if (removedArr.length === 0) return;
+    setData(notRemovedArr);
+    setCount(notRemovedArr.length);
+    localStorage.setItem("favorite", JSON.stringify(notRemovedArr));
+  };
+
+  const onCheckItem = (e: ChangeEvent<HTMLInputElement>, item: FavItem) => {
+    const filterItem = data.map((x) => {
+      if (x.id === item.id) x.checked = e.target.checked;
+      else x;
+      return x;
+    });
+    console.log(filterItem);
+    setData(filterItem);
+  };
+
+  const onCheckAllItem = (e: ChangeEvent<HTMLInputElement>) => {
+    const filterItem = data.map((x) => {
+      x.checked = e.target.checked;
+      return x;
+    });
+    setData(filterItem);
   };
 
   const InfoItem = ({ items }: InfoProps) => {
@@ -77,7 +115,7 @@ const Favorite = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Checkbox {...label} />
+                  <Checkbox {...label} onChange={(e) => onCheckAllItem(e)} />
                 </TableCell>
                 <TableCell>상품정보</TableCell>
                 <TableCell>주문금액</TableCell>
@@ -90,7 +128,11 @@ const Favorite = () => {
                   return (
                     <TableRow key={x.id}>
                       <TableCell>
-                        <Checkbox {...label} />
+                        <Checkbox
+                          {...label}
+                          onChange={(e) => onCheckItem(e, x)}
+                          checked={x.checked}
+                        />
                       </TableCell>
                       <TableCell>
                         <InfoItem items={x} />
@@ -99,7 +141,7 @@ const Favorite = () => {
                       <TableCell>
                         <Button
                           variant="outlined"
-                          onClick={() => onRemove(x.id!)}
+                          onClick={() => onRemoveItem(x.id!)}
                         >
                           삭제 X
                         </Button>
@@ -109,6 +151,15 @@ const Favorite = () => {
                 })}
             </TableBody>
           </Table>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            css={favorite_css.delete}
+            onClick={onRemoveItems}
+          >
+            삭제하기
+          </Button>
         </div>
       </div>
     </Container>

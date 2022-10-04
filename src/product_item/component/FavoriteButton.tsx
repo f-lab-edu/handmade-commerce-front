@@ -40,6 +40,7 @@ const FavoriteButton = ({ name, brand, base_price, id, mainImg }: Props) => {
       variant="contained"
       color="secondary"
       onClick={onClick}
+      size="large"
     >
       찜하기
     </Button>
