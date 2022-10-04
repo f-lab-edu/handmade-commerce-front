@@ -15,7 +15,7 @@ const image_css = {
     marginRight: 20,
   }),
   zoom: css({
-    transition: "0.5s",
+    transition: "1s",
     "&:hover": {
       transform: "scale(1.5)",
     },
@@ -30,6 +30,7 @@ const ProductImage = ({ images }: Props) => {
   };
 
   useEffect(() => {
+    console.log("===click===");
     setSelectedImg(images[0]);
   }, [images]);
 
