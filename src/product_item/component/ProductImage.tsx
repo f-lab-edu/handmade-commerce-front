@@ -43,7 +43,7 @@ const ProductImage = ({ images }: Props) => {
           width={600}
           alt="detail-image"
           placeholder="blur"
-          blurDataURL="../../images/default-image.png"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Vw8AAkEBX6r220kAAAAASUVORK5CYII="
           priority
           // css={image_css.zoom}
         />
