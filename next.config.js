@@ -5,6 +5,8 @@ const nextConfig = {
   concurrentFeatures: true,
   swcMinify: true,
   images: {
+    loader: "akamai",
+    path: "",
     domains: ["image.wconcept.co.kr", "goldendew.com", "ai.esmplus.com"],
   },
 };
