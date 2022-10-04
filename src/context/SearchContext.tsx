@@ -7,7 +7,7 @@ import {
 } from "react";
 import { ChildrenProps } from "../shared/interface/props";
 
-interface IGlobalContext {
+interface ISearchContext {
   category: string;
   setCategory?: any;
   subCategory: string;
@@ -16,21 +16,21 @@ interface IGlobalContext {
   setKeyword?: any;
 }
 
-export const GlobalContext = createContext<IGlobalContext>({
+export const SearchContext = createContext<ISearchContext>({
   category: "1",
   subCategory: "1",
   keyword: "",
 });
 
-export const useHeader = () => useContext(GlobalContext);
+export const useSearchContext = () => useContext(SearchContext);
 
-export const ContextProvider = ({ children }: ChildrenProps) => {
+export const SearchProvider = ({ children }: ChildrenProps) => {
   const [category, setCategory] = useState("1");
   const [subCategory, setSubCategory] = useState("1");
   const [keyword, setKeyword] = useState("");
 
   return (
-    <GlobalContext.Provider
+    <SearchContext.Provider
       value={{
         category,
         setCategory,
@@ -41,6 +41,6 @@ export const ContextProvider = ({ children }: ChildrenProps) => {
       }}
     >
       {children}
-    </GlobalContext.Provider>
+    </SearchContext.Provider>
   );
 };

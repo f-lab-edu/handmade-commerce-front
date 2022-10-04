@@ -4,7 +4,7 @@ import { flex_css } from "../../../shared/styles/shared";
 import { ProductType } from "../../product_list/interface";
 import DividerLine from "../../shared/component/Divider";
 import Divider from "../../shared/component/Divider";
-import ButtonContainer from "./ButtonContainer";
+import FavoriteButton from "./FavoriteButton";
 import InfoBox from "./InfoBox";
 
 const info_css = {
@@ -27,16 +27,7 @@ const info_css = {
   }),
 };
 
-const ProductInfo = ({
-  name,
-  brand,
-  id,
-  category,
-  detailImg,
-  base_price,
-  subCategory,
-  discount_price,
-}: ProductType) => {
+const ProductInfo = ({ name, brand, base_price, id, mainImg }: ProductType) => {
   const SaleInfo = () => {
     return (
       <>
@@ -94,7 +85,13 @@ const ProductInfo = ({
           <span>최대 6개월</span>
         </InfoBox.Content>
       </InfoBox>
-      <ButtonContainer />
+      <FavoriteButton
+        id={id!}
+        name={name!}
+        brand={brand!}
+        base_price={base_price!}
+        mainImg={mainImg!}
+      />
     </div>
   );
 };

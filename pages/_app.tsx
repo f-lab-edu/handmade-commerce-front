@@ -13,7 +13,8 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import { ThemeProvider } from "@mui/material/styles";
-import { ContextProvider } from "../src/hook/GlobalContext";
+import { SearchProvider } from "../src/context/SearchContext";
+import { FavoriteProvider } from "../src/context/FavoriteContext";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -39,21 +40,23 @@ function MyApp({
       })
   );
   return (
-    <ContextProvider>
-      <CacheProvider value={emotionCache}>
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <ErrorBoundary>
-              <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Component {...pageProps} />
-              </ThemeProvider>
-            </ErrorBoundary>
-          </Hydrate>
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-      </CacheProvider>
-    </ContextProvider>
+    <SearchProvider>
+      <FavoriteProvider>
+        <CacheProvider value={emotionCache}>
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <ErrorBoundary>
+                <ThemeProvider theme={theme}>
+                  <CssBaseline />
+                  <Component {...pageProps} />
+                </ThemeProvider>
+              </ErrorBoundary>
+            </Hydrate>
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </CacheProvider>
+      </FavoriteProvider>
+    </SearchProvider>
   );
 }
 
