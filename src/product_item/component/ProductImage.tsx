@@ -38,14 +38,14 @@ const ProductImage = ({ images }: Props) => {
     <div css={flex_css.flex_column}>
       {images.length > 0 && (
         <Image
-          src={selectedImg || DefaultImage}
+          src={selectedImg}
           height={800}
           width={600}
           alt="detail-image"
           placeholder="blur"
           blurDataURL="../../images/default-image.png"
           priority
-          // css={image_css.zoom}
+          css={image_css.zoom}
         />
       )}
       <div css={flex_css.flex_row}>
