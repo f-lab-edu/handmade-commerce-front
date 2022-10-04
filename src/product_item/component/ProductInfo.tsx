@@ -33,21 +33,20 @@ const ProductInfo = ({ name, brand, base_price, id, mainImg }: ProductType) => {
       <>
         <div>
           <div css={[flex_css.flex_row]}>
-            <span>PAYCO</span>
-            <span css={info_css.sale_price}>&nbsp;4000원&nbsp;</span>
-            <span>할인</span>
+            <span>H SHOP은 </span>
+            <span css={info_css.sale_price}>&nbsp;1:1 주문&nbsp;</span>
+            <span>제작 방식입니다.</span>
           </div>
-          <span>4천원 이상 생애 첫 결제시 즉시 4천원 캐시백</span>
+          <span>주문은 항상 이메일로 받습니다.</span>
         </div>
-        <br />
+        {/* <br />
         <div>
           <div css={[flex_css.flex_row]}>
             <span>TOSS</span>
             <span css={info_css.sale_price}>&nbsp;3000원&nbsp;</span>
             <span>할인</span>
           </div>
-          <span>토스페이로 5만원 이상 생애 첫 결제시 즉시 4천원 캐시백</span>
-        </div>
+        </div> */}
       </>
     );
   };
@@ -73,18 +72,18 @@ const ProductInfo = ({ name, brand, base_price, id, mainImg }: ProductType) => {
       </InfoBox>
       <Divider color="black" marginBottom={20} marginTop={20} height={3} />
       <InfoBox>
-        <InfoBox.Title>추가 혜택가</InfoBox.Title>
+        <InfoBox.Title>주문</InfoBox.Title>
         <InfoBox.Content>
           <SaleInfo />
         </InfoBox.Content>
       </InfoBox>
-      <DividerLine marginBottom={20} marginTop={20} />
+      {/* <DividerLine marginBottom={20} marginTop={20} />
       <InfoBox>
         <InfoBox.Title>무이자 할부</InfoBox.Title>
         <InfoBox.Content>
           <span>최대 6개월</span>
         </InfoBox.Content>
-      </InfoBox>
+      </InfoBox> */}
       <FavoriteButton
         id={id!}
         name={name!}
