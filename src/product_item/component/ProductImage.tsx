@@ -4,6 +4,7 @@ import { flex_css } from "../../../shared/styles/shared";
 import { css } from "@emotion/react";
 import DefaultImage from "../../images/default-image.png";
 import { makeStyles } from "@mui/material";
+import { blurDataUrl } from "../../shared/data/base64";
 
 interface Props {
   images: string[];
@@ -23,7 +24,7 @@ const image_css = {
 };
 
 const ProductImage = ({ images }: Props) => {
-  const [selectedImg, setSelectedImg] = useState(images[0]);
+  const [selectedImg, setSelectedImg] = useState("");
 
   const onClickImage = async (imageUrl: string) => {
     setSelectedImg(imageUrl);
@@ -36,16 +37,18 @@ const ProductImage = ({ images }: Props) => {
 
   return (
     <div css={flex_css.flex_column}>
-      <Image
-        src={selectedImg || DefaultImage}
-        height={800}
-        width={600}
-        alt="detail-image"
-        placeholder="blur"
-        blurDataURL="../../images/default-image.png"
-        priority
-        css={image_css.zoom}
-      />
+      {images.length > 0 && (
+        <Image
+          src={selectedImg}
+          height={800}
+          width={600}
+          alt="detail-image"
+          placeholder="blur"
+          blurDataURL={blurDataUrl}
+          priority
+          css={image_css.zoom}
+        />
+      )}
       <div css={flex_css.flex_row}>
         {images.length > 0 &&
           images.map((x, i) => {

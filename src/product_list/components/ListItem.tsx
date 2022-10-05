@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import Image from "next/image";
 import React from "react";
 import { flex_css } from "../../../shared/styles/shared";
+import { blurDataUrl } from "../../shared/data/base64";
 import { ProductType } from "../interface";
 import List from "./List";
 
@@ -19,7 +20,7 @@ const ListItem = ({ value }: Props) => {
         alt="thumbnail"
         layout="responsive"
         placeholder="blur"
-        blurDataURL="../../images/default-image.png"
+        blurDataURL={blurDataUrl}
       />
       <List.Info>
         <List.InfoText>{value.brand}</List.InfoText>
