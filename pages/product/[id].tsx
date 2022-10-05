@@ -41,14 +41,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data } = useProductItem(id);
+  const { data, isSuccess } = useProductItem(id);
 
   return (
     <Container>
       <Product>
         <Product.Head>
           <Product.HeadLeft>
-            <ProductImage images={data?.detailImg!} />
+            {isSuccess && <ProductImage images={data?.detailImg!} />}
           </Product.HeadLeft>
           <Product.HeadRight>
             <ProductInfo
