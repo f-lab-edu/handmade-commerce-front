@@ -24,7 +24,7 @@ const image_css = {
 };
 
 const ProductImage = ({ images }: Props) => {
-  const [selectedImg, setSelectedImg] = useState("");
+  const [selectedImg, setSelectedImg] = useState(images[0]);
 
   const onClickImage = async (imageUrl: string) => {
     setSelectedImg(imageUrl);
