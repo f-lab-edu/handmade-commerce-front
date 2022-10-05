@@ -9,6 +9,7 @@ import { getProductItem, getAllList } from "../../src/hook/product";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Container from "../../src/shared/component/Container";
+import css from "@emotion/react";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -29,11 +30,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const { id } = context.params as IParams;
   await queryClient.prefetchQuery(["product"], () => getProductItem(id));
+  // const data = await getProductItem(id);
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
       id,
+      // data,
     },
   };
 };
@@ -41,7 +44,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data, isSuccess } = useProductItem(id);
+  const { data, isFetching } = useProductItem(id);
+
+  if (isFetching) {
+    console.log("isFETCHIGNNNNN");
+    return <div>is FETCHING</div>;
+  }
 
   return (
     <Container>
