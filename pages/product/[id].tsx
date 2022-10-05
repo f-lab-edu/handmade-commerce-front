@@ -44,19 +44,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data, isFetching } = useProductItem(id);
+  const { data, isFetching, isLoading } = useProductItem(id);
 
-  if (isFetching) {
-    console.log("isFETCHIGNNNNN");
-    return <div>is FETCHING</div>;
-  }
+  // if (isFetching) return <div>isFetcing</div>;
+  // else return <div> ELS</div>;
 
   return (
     <Container>
       <Product>
         <Product.Head>
           <Product.HeadLeft>
-            <ProductImage images={data?.detailImg!} />
+            {!isFetching && <ProductImage images={data?.detailImg!} />}
           </Product.HeadLeft>
           <Product.HeadRight>
             <ProductInfo
