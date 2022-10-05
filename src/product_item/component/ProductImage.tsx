@@ -31,7 +31,6 @@ const ProductImage = ({ images }: Props) => {
   };
 
   useEffect(() => {
-    console.log("===click===");
     setSelectedImg(images[0]);
   }, [images]);
 
