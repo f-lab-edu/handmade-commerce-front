@@ -46,7 +46,7 @@ const ProdouctItem = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { data, isFetching, isLoading } = useProductItem(id);
 
-  // if (isFetching) return <div>isFetcing</div>;
+  if (isFetching) return <div>isFetcing</div>;
   // else return <div> ELS</div>;
 
   return (
@@ -54,7 +54,7 @@ const ProdouctItem = ({
       <Product>
         <Product.Head>
           <Product.HeadLeft>
-            {!isFetching && <ProductImage images={data?.detailImg!} />}
+            <ProductImage images={data?.detailImg!} />
           </Product.HeadLeft>
           <Product.HeadRight>
             <ProductInfo
