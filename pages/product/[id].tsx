@@ -48,7 +48,7 @@ const ProdouctItem = ({
 
   if (isFetching) {
     console.log("isFETCHIGNNNNN");
-    return <div>is FETCHING</div>;
+    return <div>is FETCHING!!!!</div>;
   }
 
   return (
