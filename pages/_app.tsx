@@ -33,7 +33,7 @@ function MyApp({
         defaultOptions: {
           queries: {
             retry: 0,
-            suspense: true,
+            // suspense: true,
             useErrorBoundary: true,
           },
         },

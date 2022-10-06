@@ -26,7 +26,7 @@ export const getStaticProps = async (context: any) => {
 const ListContent = dynamic(
   () => import("../src/product_list/components/ListContent"),
   {
-    suspense: true,
+    // suspense: true,
   }
 );
 
