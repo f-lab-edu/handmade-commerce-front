@@ -46,7 +46,7 @@ const Favorite = () => {
 
   useEffect(() => {
     const fav_arr = JSON.parse(localStorage.getItem("favorite")!);
-    const favData = fav_arr.map((x: FavItem) => ({
+    const favData = fav_arr?.map((x: FavItem) => ({
       ...x,
       checked: false,
     }));
