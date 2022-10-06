@@ -44,10 +44,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const ProdouctItem = ({
   id,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data, isFetching, isLoading } = useProductItem(id);
-
-  if (isFetching) return <div>isFetcing</div>;
-  // else return <div> ELS</div>;
+  const { data } = useProductItem(id);
 
   return (
     <Container>
