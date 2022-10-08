@@ -10,8 +10,9 @@ import dynamic from "next/dynamic";
 import { getPrefetchList } from "../src/product_list/remotes";
 import Container from "../src/shared/component/Container";
 import { useSearchContext } from "../src/context/SearchContext";
-import { css } from "@emotion/react";
-export const getStaticProps = async (context: any) => {
+import AsyncBoundary from "../src/shared/async/AsyncBoundary";
+
+export const getStaticProps = async () => {
   const queryClient = new QueryClient();
 
   await getPrefetchList();
@@ -26,7 +27,7 @@ export const getStaticProps = async (context: any) => {
 const ListContent = dynamic(
   () => import("../src/product_list/components/ListContent"),
   {
-    // suspense: true,
+    suspense: true,
   }
 );
 
@@ -43,9 +44,9 @@ const Home: NextPage = () => {
       <Container>
         <main css={[flex_css.flex_row]}>
           {!keyword && <CategoryContent />}
-          <Suspense fallback={<Loading />}>
+          <AsyncBoundary>
             <ListContent />
-          </Suspense>
+          </AsyncBoundary>
         </main>
       </Container>
     </div>
