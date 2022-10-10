@@ -14,6 +14,7 @@ import { css } from "@emotion/react";
 import { flex_css } from "../shared/styles/shared";
 import Image from "next/image";
 import { useFavoriteContext } from "../src/context/FavoriteContext";
+import { useLocalStorage } from "../src/hook/useLocalStorage";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -38,27 +39,29 @@ interface InfoProps {
   items: ProductType;
 }
 
+const defaultData: FavItem[] = [
+  { id: 0, name: "", brand: "", base_price: "", mainImg: "", checked: false },
+];
+
 const Favorite = () => {
-  const [data, setData] = useState<FavItem[]>([
-    { id: 0, name: "", brand: "", base_price: "", mainImg: "", checked: false },
-  ]);
+  const [data, setData] = useState<FavItem[]>(defaultData);
   const { setCount, count } = useFavoriteContext();
+  const [locaData, setLocalData] = useLocalStorage("favorite", defaultData);
 
   useEffect(() => {
-    const fav_arr = JSON.parse(localStorage.getItem("favorite")!);
-    const favData = fav_arr?.map((x: FavItem) => ({
+    const favDataArr = locaData?.map((x: FavItem) => ({
       ...x,
       checked: false,
     }));
-    console.log(favData);
-    setData(favData || []);
-  }, []);
+    console.log(favDataArr);
+    setData(favDataArr || []);
+  }, [locaData]);
 
   const onRemoveItem = (id: number) => {
     const filterItem = data.filter((item) => item.id !== id);
     setData(filterItem);
     setCount(filterItem.length);
-    localStorage.setItem("favorite", JSON.stringify(filterItem));
+    setLocalData(filterItem);
   };
 
   const onRemoveItems = () => {
@@ -67,7 +70,7 @@ const Favorite = () => {
     if (removedArr.length === 0) return;
     setData(notRemovedArr);
     setCount(notRemovedArr.length);
-    localStorage.setItem("favorite", JSON.stringify(notRemovedArr));
+    setLocalData(notRemovedArr);
   };
 
   const onCheckItem = (e: ChangeEvent<HTMLInputElement>, item: FavItem) => {
