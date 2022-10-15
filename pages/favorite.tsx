@@ -15,6 +15,7 @@ import { flex_css } from "../shared/styles/shared";
 import Image from "next/image";
 import { useFavoriteContext } from "../src/context/FavoriteContext";
 import { useLocalStorage } from "../src/hook/useLocalStorage";
+import { useFavoriteItem } from "../src/hook/useFavoriteStorage";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -39,42 +40,38 @@ interface InfoProps {
   items: ProductType;
 }
 
-const defaultData: FavItem[] = [
-  { id: 0, name: "", brand: "", base_price: "", mainImg: "", checked: false },
-];
-
 const Favorite = () => {
-  const [data, setData] = useState<FavItem[]>(defaultData);
+  const [data, setData] = useState<FavItem[]>();
   const { setCount, count } = useFavoriteContext();
-  const [locaData, setLocalData] = useLocalStorage("favorite", defaultData);
+  const [favoriteData, setFavoriteData] = useFavoriteItem();
 
   useEffect(() => {
-    const favDataArr = locaData?.map((x: FavItem) => ({
+    const favDataArr = favoriteData?.map((x: FavItem) => ({
       ...x,
       checked: false,
     }));
     console.log(favDataArr);
-    setData(favDataArr || []);
-  }, [locaData]);
+    setData(favDataArr);
+  }, [favoriteData]);
 
   const onRemoveItem = (id: number) => {
-    const filterItem = data.filter((item) => item.id !== id);
+    const filterItem = data?.filter((item) => item.id !== id);
     setData(filterItem);
-    setCount(filterItem.length);
-    setLocalData(filterItem);
+    setCount(filterItem?.length);
+    setFavoriteData(filterItem);
   };
 
   const onRemoveItems = () => {
-    const removedArr = data.filter((item) => item.checked === true);
-    const notRemovedArr = data.filter((item) => item.checked !== true);
-    if (removedArr.length === 0) return;
+    const removedArr = data?.filter((item) => item.checked === true);
+    const notRemovedArr = data?.filter((item) => item.checked !== true);
+    if (removedArr?.length === 0) return;
     setData(notRemovedArr);
-    setCount(notRemovedArr.length);
-    setLocalData(notRemovedArr);
+    setCount(notRemovedArr?.length);
+    setFavoriteData(notRemovedArr);
   };
 
   const onCheckItem = (e: ChangeEvent<HTMLInputElement>, item: FavItem) => {
-    const filterItem = data.map((x) => {
+    const filterItem = data?.map((x) => {
       if (x.id === item.id) x.checked = e.target.checked;
       else x;
       return x;
@@ -84,7 +81,7 @@ const Favorite = () => {
   };
 
   const onCheckAllItem = (e: ChangeEvent<HTMLInputElement>) => {
-    const filterItem = data.map((x) => {
+    const filterItem = data?.map((x) => {
       x.checked = e.target.checked;
       return x;
     });
@@ -126,8 +123,8 @@ const Favorite = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.length > 0 &&
-                data.map((x) => {
+              {data?.length! > 0 &&
+                data?.map((x) => {
                   return (
                     <TableRow key={x.id}>
                       <TableCell>
