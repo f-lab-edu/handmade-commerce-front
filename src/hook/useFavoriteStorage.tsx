@@ -1,5 +1,6 @@
 import { ProductType } from "../product_list/interface";
 import { useLocalStorage } from "./useLocalStorage";
+
 interface FavItem extends ProductType {
   checked: boolean;
 }
