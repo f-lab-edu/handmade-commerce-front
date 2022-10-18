@@ -17,7 +17,7 @@ import { useFavoriteContext } from "../src/context/FavoriteContext";
 import { useLocalStorage } from "../src/hook/useLocalStorage";
 import { useFavoriteItem } from "../src/hook/useFavoriteStorage";
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+const label = { inputProps: { "aria-label": "checkboxAll" } };
 
 const favorite_css = {
   container: css({
@@ -57,7 +57,7 @@ const Favorite = () => {
   const onRemoveItem = (id: number) => {
     const filterItem = data?.filter((item) => item.id !== id);
     setData(filterItem);
-    setCount(filterItem?.length);
+    if (setCount) setCount(filterItem?.length!);
     setFavoriteData(filterItem);
   };
 
@@ -66,7 +66,7 @@ const Favorite = () => {
     const notRemovedArr = data?.filter((item) => item.checked !== true);
     if (removedArr?.length === 0) return;
     setData(notRemovedArr);
-    setCount(notRemovedArr?.length);
+    if (setCount) setCount(notRemovedArr?.length!);
     setFavoriteData(notRemovedArr);
   };
 

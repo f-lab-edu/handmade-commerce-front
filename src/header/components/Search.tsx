@@ -1,9 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { css, IconButton, TextField } from "@mui/material";
+import { Button, css, IconButton, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { flex_css } from "../../../shared/styles/shared";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface Props {}
 
@@ -35,6 +36,9 @@ const Search = () => {
         variant="standard"
         value={inputValue}
         onChange={onHandleChange}
+        inputProps={{
+          "aria-label": "searchInput",
+        }}
       />
       <Link
         href={{
@@ -42,7 +46,12 @@ const Search = () => {
           query: { keyword: inputValue },
         }}
       >
-        <IconButton disabled={inputValue.length < 1} component="label">
+        {/* <button>asdf</button> */}
+        <IconButton
+          disabled={inputValue.length < 1}
+          component="label"
+          aria-label="searchBtn"
+        >
           <SearchIcon />
         </IconButton>
       </Link>
