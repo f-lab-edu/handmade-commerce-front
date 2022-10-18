@@ -9,11 +9,11 @@ import { ChildrenProps } from "../shared/interface/props";
 
 interface ISearchContext {
   category: string;
-  setCategory?: any;
+  setCategory?: Dispatch<SetStateAction<string>>;
   subCategory: string;
-  setSubCategory?: any;
+  setSubCategory?: Dispatch<SetStateAction<string>>;
   keyword: string;
-  setKeyword?: any;
+  setKeyword?: Dispatch<SetStateAction<string>>;
 }
 
 export const SearchContext = createContext<ISearchContext>({

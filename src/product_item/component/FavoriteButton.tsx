@@ -29,7 +29,7 @@ const FavoriteButton = ({ name, brand, base_price, id, mainImg }: Props) => {
         "favorite",
         JSON.stringify([...res, { id, name, brand, base_price, mainImg }])
       );
-      setCount(res.length + 1);
+      if (setCount) setCount(res.length + 1);
       router.push("/favorite");
     }
   };
