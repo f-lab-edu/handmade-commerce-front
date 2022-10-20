@@ -16,6 +16,7 @@ import Image from "next/image";
 import { useFavoriteContext } from "../src/context/FavoriteContext";
 import { useLocalStorage } from "../src/hook/useLocalStorage";
 import { useFavoriteItem } from "../src/hook/useFavoriteStorage";
+import Head from "next/head";
 
 const label = { inputProps: { "aria-label": "checkboxAll" } };
 
@@ -107,62 +108,69 @@ const Favorite = () => {
   };
 
   return (
-    <Container>
-      <div>
-        <h1>상품 ({count})</h1>
-        <div css={favorite_css.container}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>
-                  <Checkbox {...label} onChange={(e) => onCheckAllItem(e)} />
-                </TableCell>
-                <TableCell>상품정보</TableCell>
-                <TableCell>주문금액</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data?.length! > 0 &&
-                data?.map((x) => {
-                  return (
-                    <TableRow key={x.id}>
-                      <TableCell>
-                        <Checkbox
-                          {...label}
-                          onChange={(e) => onCheckItem(e, x)}
-                          checked={x.checked}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <InfoItem items={x} />
-                      </TableCell>
-                      <TableCell>{x.base_price}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="outlined"
-                          onClick={() => onRemoveItem(x.id!)}
-                        >
-                          삭제 X
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            css={favorite_css.delete}
-            onClick={onRemoveItems}
-          >
-            삭제하기
-          </Button>
+    <div>
+      <Head>
+        <title>찜한 상품 목록</title>
+        <meta name="description" content="찜한 상품 목록 입니다." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Container>
+        <div>
+          <h1>상품 ({count})</h1>
+          <div css={favorite_css.container}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>
+                    <Checkbox {...label} onChange={(e) => onCheckAllItem(e)} />
+                  </TableCell>
+                  <TableCell>상품정보</TableCell>
+                  <TableCell>주문금액</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.length! > 0 &&
+                  data?.map((x) => {
+                    return (
+                      <TableRow key={x.id}>
+                        <TableCell>
+                          <Checkbox
+                            {...label}
+                            onChange={(e) => onCheckItem(e, x)}
+                            checked={x.checked}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <InfoItem items={x} />
+                        </TableCell>
+                        <TableCell>{x.base_price}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="outlined"
+                            onClick={() => onRemoveItem(x.id!)}
+                          >
+                            삭제 X
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              css={favorite_css.delete}
+              onClick={onRemoveItems}
+            >
+              삭제하기
+            </Button>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

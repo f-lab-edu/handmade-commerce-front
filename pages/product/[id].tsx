@@ -10,6 +10,7 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Container from "../../src/shared/component/Container";
 import css from "@emotion/react";
+import Head from "next/head";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -47,27 +48,34 @@ const ProdouctItem = ({
   const { data } = useProductItem(id);
 
   return (
-    <Container>
-      <Product>
-        <Product.Head>
-          <Product.HeadLeft>
-            <ProductImage images={data?.detailImg!} />
-          </Product.HeadLeft>
-          <Product.HeadRight>
-            <ProductInfo
-              name={data?.name}
-              brand={data?.brand}
-              base_price={data?.base_price}
-              id={data?.id}
-              mainImg={data?.mainImg}
-            />
-          </Product.HeadRight>
-        </Product.Head>
-        {/* <Product.Body>
+    <div>
+      <Head>
+        <title>{data?.name}</title>
+        <meta name="description" content={`${data?.brand} ${data?.name}`} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Container>
+        <Product>
+          <Product.Head>
+            <Product.HeadLeft>
+              <ProductImage images={data?.detailImg!} />
+            </Product.HeadLeft>
+            <Product.HeadRight>
+              <ProductInfo
+                name={data?.name}
+                brand={data?.brand}
+                base_price={data?.base_price}
+                id={data?.id}
+                mainImg={data?.mainImg}
+              />
+            </Product.HeadRight>
+          </Product.Head>
+          {/* <Product.Body>
           <ProductDetailImage images={data?.detailImg} />
         </Product.Body> */}
-      </Product>
-    </Container>
+        </Product>
+      </Container>
+    </div>
   );
 };
 
