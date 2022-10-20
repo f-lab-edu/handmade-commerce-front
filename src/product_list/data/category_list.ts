@@ -45,9 +45,4 @@ export const category_list = [
       },
     ],
   },
-  {
-    id: 3,
-    name: "LIFE",
-    link: "",
-  },
 ];
