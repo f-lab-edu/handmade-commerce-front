@@ -64,7 +64,6 @@ const Search = () => {
           query: { keyword: inputValue },
         }}
       >
-        {/* <button>asdf</button> */}
         <IconButton
           disabled={inputValue.length < 1}
           component="label"
