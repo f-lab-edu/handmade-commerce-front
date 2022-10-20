@@ -20,7 +20,7 @@ const Cart = () => {
 
   useEffect(() => {
     const itemCount = JSON.parse(localStorage.getItem("favorite")!);
-    if (setCount) setCount(itemCount.length);
+    if (setCount) setCount(itemCount?.length);
   }, [setCount]);
 
   return (
