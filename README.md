@@ -1,6 +1,6 @@
 # HANDMADE SHOP
 
-http://limsangsang.tk
+http://limsangsang.tk  
 개인 브랜드의 옷을 맞춤으로 구매할 수 있는 쇼핑몰입니다.
 
 ## 사용 기술
