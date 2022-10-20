@@ -40,7 +40,6 @@ const ListContent = () => {
 
   return (
     <List>
-      {/* <Search setKeyword={setKeyword} setEnabledButton={setEnabledButton} /> */}
       <List.Content>
         {data?.list?.length! > 0 ? (
           data?.list?.map((x: ProductType) => <ListItem key={x.id} value={x} />)
