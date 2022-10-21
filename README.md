@@ -24,3 +24,14 @@ http://limsangsang.tk
 3. Suspense로 사용자 경험 개선
 4. ErrorBoundary를 통해 선언적 에러 핸들링
 5. 지역성 원칙을 적용한 폴더구조
+
+## 기능
+
+- 메인 페이지
+  <img src='https://user-images.githubusercontent.com/59826225/197116290-2f503cd9-b5d5-4df9-9450-c53fc16db869.png' />
+
+- 상세 페이지
+  <img src='https://user-images.githubusercontent.com/59826225/197116596-1b91d749-1f9d-45e0-9e0c-739bb54db045.png' />
+
+- 장바구니
+  <img src='https://user-images.githubusercontent.com/59826225/197116727-be385427-5c6c-492b-9013-5bc1565db49c.png' />
