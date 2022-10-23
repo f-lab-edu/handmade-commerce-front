@@ -9,7 +9,7 @@ import { ChildrenProps } from "../shared/interface/props";
 
 interface IFavoriteContext {
   count: number;
-  setCount?: any;
+  setCount?: Dispatch<SetStateAction<number>>;
 }
 
 export const FavoriteContext = createContext<IFavoriteContext>({

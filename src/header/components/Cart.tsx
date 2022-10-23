@@ -19,10 +19,9 @@ const Cart = () => {
   const { count, setCount } = useFavoriteContext();
 
   useEffect(() => {
-    const itemCount = JSON.parse(localStorage.getItem("favorite")!)?.length;
-    console.log(itemCount);
-    setCount(itemCount || 0);
-  }, []);
+    const itemCount = JSON.parse(localStorage.getItem("favorite")!);
+    if (setCount) setCount(itemCount?.length);
+  }, [setCount]);
 
   return (
     <div css={[flex_css.flex_row, cart_css.container]}>

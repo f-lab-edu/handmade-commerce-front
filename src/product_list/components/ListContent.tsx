@@ -6,6 +6,7 @@ import { Pagination } from "@mui/material";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSearchContext } from "../../context/SearchContext";
+import NotFound from "./NotFound";
 
 const ListContent = () => {
   const [page, setPage] = useState(1);
@@ -17,17 +18,17 @@ const ListContent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router?.isReady) return;
     const categoryQ = router.query.category as string;
     const subCategoryQ = router.query.subCategory as string;
     const keywordQ = router.query.keyword as string;
     if (keywordQ) {
-      setKeyword(keywordQ);
-      setCategory("0");
+      if (setKeyword) setKeyword(keywordQ);
+      if (setCategory) setCategory("0");
     } else {
-      setCategory(categoryQ ? categoryQ : "1");
-      setSubCategory(subCategoryQ ? subCategoryQ : "1");
-      setKeyword("");
+      if (setCategory) setCategory(categoryQ ? categoryQ : "1");
+      if (setSubCategory) setSubCategory(subCategoryQ ? subCategoryQ : "1");
+      if (setKeyword) setKeyword("");
     }
     setPage(1);
   }, [router.isReady, router.query, setCategory, setKeyword, setSubCategory]);
@@ -39,11 +40,12 @@ const ListContent = () => {
 
   return (
     <List>
-      {/* <Search setKeyword={setKeyword} setEnabledButton={setEnabledButton} /> */}
       <List.Content>
-        {data?.list?.map((x: ProductType) => (
-          <ListItem key={x.id} value={x} />
-        ))}
+        {data?.list?.length! > 0 ? (
+          data?.list?.map((x: ProductType) => <ListItem key={x.id} value={x} />)
+        ) : (
+          <NotFound />
+        )}
       </List.Content>
       <Pagination
         onChange={(e, page) => onHandlePage(page)}

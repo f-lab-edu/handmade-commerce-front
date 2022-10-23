@@ -23,9 +23,9 @@ const ListItem = ({ value }: Props) => {
         blurDataURL={blurDataUrl}
       />
       <List.Info>
-        <List.InfoText>{value.brand}</List.InfoText>
-        <List.InfoText>{value.name}</List.InfoText>
-        <List.InfoText>{value.base_price}</List.InfoText>
+        <List.Brand>{value.brand}</List.Brand>
+        <List.Name>{value.name}</List.Name>
+        <List.Price>{value.base_price}</List.Price>
       </List.Info>
     </List.Item>
   );

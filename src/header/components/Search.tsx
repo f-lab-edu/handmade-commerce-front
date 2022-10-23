@@ -1,9 +1,18 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { css, IconButton, TextField } from "@mui/material";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import { Button, css, IconButton, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { flex_css } from "../../../shared/styles/shared";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface Props {}
 
@@ -21,9 +30,18 @@ const Search = () => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
 
-  const onHandleChange = (e: any) => {
+  const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     setInputValue(e.target.value);
+  };
+
+  const onKeyEnter = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === "Enter") {
+      router.push({
+        pathname: "/",
+        query: { keyword: inputValue },
+      });
+    }
   };
 
   return (
@@ -35,6 +53,10 @@ const Search = () => {
         variant="standard"
         value={inputValue}
         onChange={onHandleChange}
+        inputProps={{
+          "aria-label": "searchInput",
+        }}
+        onKeyDown={onKeyEnter}
       />
       <Link
         href={{
@@ -42,7 +64,11 @@ const Search = () => {
           query: { keyword: inputValue },
         }}
       >
-        <IconButton disabled={inputValue.length < 1} component="label">
+        <IconButton
+          disabled={inputValue.length < 1}
+          component="label"
+          aria-label="searchBtn"
+        >
           <SearchIcon />
         </IconButton>
       </Link>
