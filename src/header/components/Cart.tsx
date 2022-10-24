@@ -16,11 +16,11 @@ const cart_css = {
 };
 
 const Cart = () => {
-  const { count, setCount } = useFavoriteContext();
+  const { setCount, count } = useFavoriteContext();
 
   useEffect(() => {
     const itemCount = JSON.parse(localStorage.getItem("favorite")!);
-    if (setCount) setCount(itemCount?.length);
+    setCount(itemCount.length);
   }, [setCount]);
 
   return (

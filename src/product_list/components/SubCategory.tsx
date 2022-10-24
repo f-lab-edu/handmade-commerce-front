@@ -22,8 +22,8 @@ const SubCategory = ({ children }: ChildrenProps) => {
 };
 
 interface Props extends ChildrenProps {
-  category: string;
-  subCategory: string;
+  category: string | undefined;
+  subCategory: string | undefined;
   id: number;
 }
 
