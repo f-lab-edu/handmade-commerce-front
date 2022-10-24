@@ -43,9 +43,8 @@ interface InfoProps {
 
 const Favorite = () => {
   const [data, setData] = useState<FavItem[]>();
-  const { setCount, count } = useFavoriteContext();
+  const ctx = useFavoriteContext();
   const [favoriteData, setFavoriteData] = useFavoriteItem();
-
   useEffect(() => {
     const favDataArr = favoriteData?.map((x: FavItem) => ({
       ...x,
@@ -54,11 +53,13 @@ const Favorite = () => {
     console.log(favDataArr);
     setData(favDataArr);
   }, [favoriteData]);
+  if (ctx === null) return;
+  const { setCount, count } = ctx;
 
   const onRemoveItem = (id: number) => {
     const filterItem = data?.filter((item) => item.id !== id);
     setData(filterItem);
-    if (setCount) setCount(filterItem?.length!);
+    setCount(filterItem?.length!);
     setFavoriteData(filterItem);
   };
 
@@ -67,7 +68,7 @@ const Favorite = () => {
     const notRemovedArr = data?.filter((item) => item.checked !== true);
     if (removedArr?.length === 0) return;
     setData(notRemovedArr);
-    if (setCount) setCount(notRemovedArr?.length!);
+    setCount(notRemovedArr?.length!);
     setFavoriteData(notRemovedArr);
   };
 
