@@ -12,30 +12,15 @@ import InfoItem from "./InfoItem";
 import { css } from "@emotion/react";
 import { useFavoriteContext } from "../../../src/context/FavoriteContext";
 import { useFavoriteItem } from "../../../src/hook/useFavoriteStorage";
+import { filter, map } from "../../../src/shared/utils";
 
 interface FavoriteItem extends ProductType {
-  checked: boolean;
+  checked?: boolean;
 }
 
-interface Props {
-  //   data: FavoriteItem[] | undefined;
-  //   setData: Dispatch<SetStateAction<FavoriteItem[] | undefined>>;
-  //   onToggleItem: (e: ChangeEvent<HTMLInputElement>, item: FavoriteItem) => void;
-  //   onRemoveItem: (id: number) => void;
-  //   onRemoveItems: () => void;
-  // onCheckAllItem: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-
-const FavoriteTable = ({}: //   data,
-//   setData,
-//   onCheckAllItem,
-//   onToggleItem,
-//   onRemoveItem,
-//   onRemoveItems,
-Props) => {
+const FavoriteTable = () => {
   const label = { inputProps: { "aria-label": "select-all-checkbox" } };
-  const labelItem = { inputProps: { "aria-label": "select-checkbox" } };
-  const [data, setData] = useState<FavoriteItem[]>();
+  const [data, setData] = useState<FavoriteItem[] | undefined>();
   const { setCount, count } = useFavoriteContext();
   const [favoriteData, setFavoriteData] = useFavoriteItem();
 
@@ -47,9 +32,20 @@ Props) => {
     setData(favDataArr);
   }, [favoriteData, setData]);
 
-  const onRemoveItems = () => {
-    const removedArr = data?.filter((item) => item.checked === true);
-    const notRemovedArr = data?.filter((item) => item.checked !== true);
+  const onRemoveItems = (
+    value: FavoriteItem[],
+    setData: (v: FavoriteItem[]) => void,
+    setCount: (count: number) => void,
+    setFavoriteData: (v: FavoriteItem[]) => void
+  ) => {
+    const removedArr = filter(
+      (item: FavoriteItem) => item.checked === true,
+      value
+    );
+    const notRemovedArr = filter(
+      (item: FavoriteItem) => item.checked !== true,
+      value
+    );
     if (removedArr?.length === 0) return;
     setData(notRemovedArr);
     setCount(notRemovedArr?.length!);
@@ -58,27 +54,38 @@ Props) => {
 
   const onToggleItem = (
     e: ChangeEvent<HTMLInputElement>,
-    item: FavoriteItem
+    item: FavoriteItem,
+    value: FavoriteItem[],
+    setData: (v: FavoriteItem[]) => void
   ) => {
-    const filterItem = data?.map((x) => {
+    const filterItem = map((x: FavoriteItem) => {
       if (x.id === item.id) x.checked = e.target.checked;
       else x;
       return x;
-    });
+    }, value);
     console.log(filterItem);
     setData(filterItem);
   };
 
-  const onCheckAllItem = (e: ChangeEvent<HTMLInputElement>) => {
-    const filterItem = data?.map((x) => {
+  const onCheckAllItem = (
+    e: ChangeEvent<HTMLInputElement>,
+    value: FavoriteItem[]
+  ) => {
+    const filterItem = map((x: FavoriteItem) => {
       x.checked = e.target.checked;
       return x;
-    });
+    }, value);
     setData(filterItem);
   };
 
-  const onRemoveItem = (id: number) => {
-    const filterItem = data?.filter((item) => item.id !== id);
+  const onRemoveItem = (
+    id: number,
+    setData: (v: FavoriteItem[]) => void,
+    setCount: (count: number) => void,
+    setFavoriteData: (v: FavoriteItem[]) => void,
+    value: FavoriteItem[]
+  ) => {
+    const filterItem = filter((item: FavoriteItem) => item.id !== id, value);
     setData(filterItem);
     setCount(filterItem?.length!);
     setFavoriteData(filterItem);
@@ -89,11 +96,9 @@ Props) => {
       <Favorite.TableRow key={x.id}>
         <Favorite.TableCell>
           <Checkbox
-            // {...labelItem}
-            onChange={(e) => onToggleItem(e, x)}
+            onChange={(e) => onToggleItem(e, x, data!, setData)}
             checked={x.checked}
             inputProps={{ "aria-label": `row-item-${x.id}` }}
-            // data-testid={`row-item-${x.id}`}
           />
         </Favorite.TableCell>
         <Favorite.TableCell>
@@ -103,7 +108,9 @@ Props) => {
         <Favorite.TableCell>
           <Button
             variant="outlined"
-            onClick={() => onRemoveItem(x.id!)}
+            onClick={() =>
+              onRemoveItem(x.id!, setData, setCount, setFavoriteData, data!)
+            }
             data-testid="delete-button"
           >
             삭제 X
@@ -123,7 +130,7 @@ Props) => {
       <Favorite.Table data-testid="test-table">
         <Favorite.TableHead>
           <Favorite.TableCell>
-            <Checkbox {...label} onChange={(e) => onCheckAllItem(e)} />
+            <Checkbox {...label} onChange={(e) => onCheckAllItem(e, data!)} />
           </Favorite.TableCell>
           <Favorite.TableCell>상품정보</Favorite.TableCell>
           <Favorite.TableCell>주문금액</Favorite.TableCell>
@@ -135,7 +142,11 @@ Props) => {
           })}
         </Favorite.TableBody>
       </Favorite.Table>
-      <Favorite.Button onClick={onRemoveItems}>삭제하기</Favorite.Button>
+      <Favorite.Button
+        onClick={() => onRemoveItems(data!, setData, setCount, setFavoriteData)}
+      >
+        삭제하기
+      </Favorite.Button>
     </div>
   );
 };
