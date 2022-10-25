@@ -14,7 +14,7 @@ interface Props {
 }
 
 const FavoriteButton = ({ name, brand, base_price, id, mainImg }: Props) => {
-  const { setCount } = useFavoriteContext();
+  const { setCount } = useFavoriteContext()!;
   const router = useRouter();
 
   const onClick = () => {
@@ -29,7 +29,7 @@ const FavoriteButton = ({ name, brand, base_price, id, mainImg }: Props) => {
         "favorite",
         JSON.stringify([...res, { id, name, brand, base_price, mainImg }])
       );
-      setCount(res.length + 1);
+      setCount!(res.length + 1);
       router.push("/favorite");
     }
   };

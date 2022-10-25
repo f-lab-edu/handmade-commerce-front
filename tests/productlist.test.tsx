@@ -18,10 +18,10 @@ jest.mock("next/dist/shared/lib/router-context", () => {
 1. 검색 버튼 누른 후 query string 확인
 2. 상품 리스트 개수가 0일 때 <NotFound /> 컴포넌트 렌더링
 */
-describe("product list", () => {
-  beforeEach(() => {
-    mockRouter.setCurrentUrl("/");
-  });
+describe("상품 리스트", () => {
+  // beforeEach(() => {
+  //   mockRouter.setCurrentUrl("/");
+  // });
   const setup = () => {
     const { getByLabelText } = render(<Search />);
     const input = getByLabelText("searchInput");
@@ -31,13 +31,13 @@ describe("product list", () => {
       button,
     };
   };
-  it("has input and a button", () => {
+  test("input, button 렌더링 확인", () => {
     const { input, button } = setup();
     expect(input).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
 
-  it("changes input", () => {
+  it("검색 값 변경", () => {
     const { input, button } = setup();
     const value = "silver";
     fireEvent.change(input, {
@@ -48,7 +48,7 @@ describe("product list", () => {
     expect(input).toHaveAttribute("value", value);
   });
 
-  it("click button", () => {
+  it("검색 버튼 클릭", () => {
     const value = "silver";
     const { input, button } = setup();
     fireEvent.change(input, { target: { value } });
