@@ -30,8 +30,8 @@ const props = {
   mainImg:
     "https://image.wconcept.co.kr/productimg/image/img1/51/301090651.jpg",
 };
-describe("product item", () => {
-  it("add to cart", () => {
+describe("상품 상세 페이지 테스트", () => {
+  test("찜하기 추가", () => {
     jest.spyOn(Object.getPrototypeOf(window.localStorage), "setItem");
     const { getByText } = render(<FavoriteButton {...props} />);
     const button = getByText("찜하기");
@@ -42,7 +42,7 @@ describe("product item", () => {
     );
   });
 
-  it("already in cart", () => {
+  test("이미 카트에 추가되었음", () => {
     jest.spyOn(Object.getPrototypeOf(window.localStorage), "getItem");
     const localData = window.localStorage.getItem("favorite");
     const found = JSON.parse(localData!).find(

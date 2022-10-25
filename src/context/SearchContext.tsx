@@ -10,13 +10,18 @@ interface ISearchContext {
   setKeyword: (count: string) => void;
 }
 
-export const SearchContext = createContext<ISearchContext | null>(null);
+export const SearchContext = createContext<ISearchContext | null>({
+  category: "",
+  subCategory: "",
+  keyword: "",
+  setCategory: () => {},
+  setSubCategory: () => {},
+  setKeyword: () => {},
+});
 
 export const useSearchContext = () => {
   const ctx = useContext(SearchContext);
-  if (!ctx) {
-    throw new Error("Provider 하위에서 사용해주세요");
-  }
+  if (!ctx) throw Error("Context has not been Provided! ");
   return ctx;
 };
 

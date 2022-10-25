@@ -23,7 +23,7 @@ const category_css = {
 };
 
 const Category = (props: Props) => {
-  const { category } = useSearchContext();
+  const { category } = useSearchContext()!;
   return (
     <ul css={[category_css.container, flex_css.flex_row, flex_css.flex_center]}>
       {category_list.map((x) => {
