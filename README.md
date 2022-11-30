@@ -20,7 +20,7 @@ http://limsangsang.tk
 ## 설계 내용
 
 1. Next.js 도입으로 seo, 이미지 최적화
-2. Compound Component 도입으로 Props Drilling 감소, 선언적 컴포넌트 구성
+2. Compound Component으로 선언적 컴포넌트 구성
 3. Suspense로 사용자 경험 개선
 4. ErrorBoundary를 통해 선언적 에러 핸들링
 5. 지역성 원칙을 적용한 폴더구조
